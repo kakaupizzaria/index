@@ -1,0 +1,269 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Kakau Pizzas - Pizzaria Caseira, especialista em pizzas doces e salgadas | Poxoréu Mt.</title>
+  <meta name="robots" content="noindex, nofollow">
+  <meta property="og:title" content="Kakau Pizzas - Pizzaria Artesanal. Especialista em pizzas caseiras doces e salgadas">
+
+  <meta property="og:description" content="Pizzas caseiras de sabor irresistível, produzidas com muito amor e atenção aos detalhes!">
+  <meta property="og:image" content="">
+  <meta property="og:url" content="https://instagram.com/kakau_pizzas">
+  <meta property="og:type" content="website">
+  <link rel="canonical" href="https://www.exemplo.com/url-oficial/" />
+  
+  <style>
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+      font-family: Arial, sans-serif;
+    }
+
+    body {
+      background: linear-gradient(to right, #fff0f0, #ffe0e0);
+      background-image: radial-gradient(circle, #fdd 1px, transparent 1px),
+                        radial-gradient(circle, #fdd 1px, transparent 1px);
+      background-position: 0 0, 25px 25px;
+      background-size: 50px 50px;
+      line-height: 1.6;
+    }
+
+    header {
+      background-color: #b22222;
+      color: #fff;
+      padding: 1rem;
+      text-align: center;
+    }
+
+    nav {
+      display: flex;
+      justify-content: center;
+      gap: 1rem;
+      background-color: #8b0000;
+      padding: 0.5rem;
+    }
+
+    nav a {
+      color: #fff;
+      text-decoration: none;
+      transition: color 0.3s ease;
+    }
+
+    nav a:hover {
+      color: #ffd700;
+    }
+
+    section {
+      padding: 2rem;
+      max-width: 900px;
+      margin: auto;
+    }
+
+    .menu-list h4 {
+      margin-top: 1rem;
+      color: #b22222;
+    }
+
+    .pedido-form {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 1rem;
+      background: #fff5f5;
+      padding: 1rem;
+      border-radius: 8px;
+      box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+    }
+
+    .pedido-form div {
+      display: flex;
+      flex-direction: column;
+    }
+
+    label {
+      font-weight: bold;
+      margin-bottom: 0.3rem;
+    }
+
+    input[type="number"], select, button {
+      padding: 0.5rem;
+      border-radius: 5px;
+      border: 1px solid #ccc;
+    }
+
+    button {
+      background-color: #b22222;
+      color: #fff;
+      border: none;
+      cursor: pointer;
+      transition: background 0.3s;
+    }
+
+    button:hover {
+      background-color: #8b0000;
+    }
+
+    .resumo {
+      grid-column: span 2;
+      margin-top: 1rem;
+    }
+
+    footer {
+      background-color: #f4f4f4;
+      padding: 1rem;
+      text-align: center;
+    }
+
+    .whatsapp-btn {
+      display: inline-block;
+      padding: 0.5rem 1rem;
+      background-color: #25d366;
+      color: white;
+      text-decoration: none;
+      border-radius: 5px;
+    }
+  </style>
+</head>
+
+<body>
+  <header>
+    <h1>Kakau Pizzas</h1>
+  </header>
+
+  <nav>
+    <a href="#inicio">Inicial</a>
+    <a href="#sobre">Sobre nós</a>
+    <a href="#pizzas">Nossas Pizzas</a>
+    <a href="#pedidos">Pedidos</a>
+    <a href="#contato">Contato</a>
+  </nav>
+
+  <section id="inicio">
+    <h2>Bem-vindo à Kakau Pizzas</h2>
+    <p>Descubra os sabores irresistíveis de nossas pizzas artesanais!</p>
+  </section>
+
+  <section id="sobre">
+    <h2>Sobre Nós</h2>
+    <p>Na Kakau Pizzas, acreditamos que a melhor pizza é feita com carinho, ingredientes simples e um toque artesanal. Nossa produção é totalmente caseira, valorizando cada detalhe para garantir que você tenha a melhor experiência em sabor. Nossas massas são preparadas com dedicação e os ingredientes selecionados para te proporcionar uma explosão de sabor em cada mordida. Venha experimentar nossas pizzas, feitas com alma e sabor!</p>
+  </section>
+
+  <section id="pizzas">
+    <h2>Nossas Pizzas</h2>
+    <div class="menu-list">
+      <h3>Pizzas Salgadas</h3>
+      <h4>1 - Mussarela Tradicional</h4>
+      <p>Molho de tomate, mussarela, azeitonas e orégano. (R$55,00)</p>
+      <h4>2 - Calabresa</h4>
+      <p>Molho de tomate, mussarela, linguiça calabresa fatiada, cebola e orégano. (R$60,00)</p>
+      <h4>3 - Presunto e Queijo</h4>
+      <p>Molho de tomate, mussarela, presunto fatiado/picado e orégano. (R$58,00)</p>
+      <h4>4 - Vegetariano de Legumes</h4>
+      <p>Molho de tomate, mussarela, ervilha, cenoura, batata e orégano. (R$60,00)</p>
+      <h4>5 - Portuguesa (Especial da Kakau)</h4>
+      <p>Molho de tomate, mussarela, presunto, ovos cozidos picados, cebola em rodelas, azeitonas e orégano. (R$67,00)</p>
+      <h3>Pizzas Doces</h3>
+      <h4>6 - Chocolate</h4>
+      <p>Chocolate ao leite e granulado. (R$45,00)</p>
+      <h4>7 - Doce Pecado</h4>
+      <p>Morango em cortes e chocolate ao leite. (R$55,00)</p>
+      <h4>8 - Romeu e Julieta</h4>
+      <p>Doce de goiabada e queijo. (R$43,00)</p>
+    </div>
+  </section>
+
+  <section id="pedidos">
+    <h2>Faça seu Pedido</h2>
+    <form class="pedido-form" id="pedidoForm">
+      <div>
+        <label>Mussarela Tradicional (R$55)</label>
+        <input type="number" min="0" value="0" data-preco="55">
+      </div>
+      <div>
+        <label>Calabresa (R$60)</label>
+        <input type="number" min="0" value="0" data-preco="60">
+      </div>
+      <div>
+        <label>Presunto e Queijo (R$58)</label>
+        <input type="number" min="0" value="0" data-preco="58">
+      </div>
+      <div>
+        <label>Vegetariano (R$60)</label>
+        <input type="number" min="0" value="0" data-preco="60">
+      </div>
+      <div>
+        <label>Portuguesa (R$67)</label>
+        <input type="number" min="0" value="0" data-preco="67">
+      </div>
+      <div>
+        <label>Chocolate (R$45)</label>
+        <input type="number" min="0" value="0" data-preco="45">
+      </div>
+      <div>
+        <label>Doce Pecado (R$55)</label>
+        <input type="number" min="0" value="0" data-preco="55">
+      </div>
+      <div>
+        <label>Romeu e Julieta (R$43)</label>
+        <input type="number" min="0" value="0" data-preco="43">
+      </div>
+      <div class="resumo">
+        <button type="button" onclick="gerarPedido()">Enviar Pedido via WhatsApp</button>
+        <p id="total"></p>
+      </div>
+    </form>
+    <p><strong>Pagamento:</strong> Apenas via PIX - Chave: 66992115947<br>
+    Envie o comprovante de pagamento junto com seu pedido.</p>
+  </section>
+
+  <section id="contato">
+    <h2>Contato</h2>
+    <a class="whatsapp-btn" href="https://wa.me/556692115947" target="_blank">Fale Conosco pelo WhatsApp</a>
+    <h3>Envie um e-mail:</h3>
+    <form class="pedido-form" action="mailto:kakaupizzaria123@gmail.com" method="post" enctype="text/plain">
+      <input type="text" name="nome" placeholder="Nome completo" required>
+      <input type="text" name="assunto" placeholder="Assunto" required>
+      <textarea name="mensagem" placeholder="Mensagem" rows="4" required></textarea>
+      <button type="submit">Enviar</button>
+    </form>
+  </section>
+
+  <footer>
+  	<p>Funcionamos aos finais de semana para entregas. Pedidos somente de segunda a sexta</p>
+    <p>Siga-nos no Instagram: <a href="https://instagram.com/kakau_pizzas" target="_blank">@kakau_pizzas</a></p>
+    <p>Email: <a href="mailto:kakaupizzaria123@gmail.com">kakaupizzaria123@gmail.com</a></p>
+  </footer>
+
+  <script>
+    function gerarPedido() {
+      const inputs = document.querySelectorAll('#pedidoForm input[type="number"]');
+      let total = 0;
+      let textoPedido = "Olá, gostaria de fazer um pedido!%0A";
+
+      inputs.forEach((input, index) => {
+        const qtd = parseInt(input.value);
+        const preco = parseFloat(input.dataset.preco);
+        const nome = input.previousElementSibling.innerText.split(" (")[0];
+        if (qtd > 0) {
+          total += qtd * preco;
+          textoPedido += `- ${qtd}x ${nome}%0A`;
+        }
+      });
+
+      textoPedido += `%0ATotal: R$${total.toFixed(2)}%0A`;
+      textoPedido += `Pagamento via PIX (Chave: 66992115947). Enviarei o comprovante em seguida.`;
+
+      document.getElementById('total').innerText = `Total do Pedido: R$ ${total.toFixed(2)}`;
+
+      if (total > 0) {
+        window.open(`https://wa.me/556692115947?text=${textoPedido}`, '_blank');
+      } else {
+        alert('Por favor, selecione ao menos uma pizza para o pedido.');
+      }
+    }
+  </script>
+</body>
+
+</html>
