@@ -3,16 +3,9 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Kakau Pizzas - Cucina artigianale e pizzeria | Poxoréu - mt</title>
+    <title>Kakau Pizzas - Cucina artigianale e pizzeria</title>
     <link href="https://fonts.googleapis.com/css2?family=Great+Vibes&family=Montserrat:wght@300;400;700&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
-	
-    <meta property="og:title" content="Kakau Pizzas - Cucina artigianale e pizzeria. Kakau Pizzas - Pizzaria Artesanal. Especialista em pizzas caseiras doces e salgadas">
-    <meta property="og:description" content="Pizzas Artesanal de sabor irresistível, produzidas com muito amor e atenção aos detalhes e inspirados no estino italiano!">
-    <meta property="og:image" content="">
-    <meta property="og:url" content="https://instagram.com/kakau_pizzas">
-    <meta property="og:type" content="website">
-    <link rel="canonical" href="https://www.exemplo.com/url-oficial/" />
     
     <style>
         :root {
@@ -79,6 +72,7 @@
 
         nav ul li {
             margin: 0 15px;
+            position: relative; /* For submenu positioning */
         }
 
         nav ul li a {
@@ -87,11 +81,50 @@
             font-weight: bold;
             padding: 5px 0;
             transition: color 0.3s ease, transform 0.3s ease;
+            display: block; /* Make the whole area clickable */
         }
 
         nav ul li a:hover {
             color: var(--color-primary);
             transform: translateY(-2px);
+        }
+
+        /* Submenu */
+        .submenu {
+            display: none;
+            position: absolute;
+            background-color: var(--color-secondary);
+            list-style: none;
+            padding: 10px 0;
+            min-width: 200px;
+            z-index: 1000;
+            left: 50%;
+            transform: translateX(-50%);
+            top: 100%;
+            border-radius: 5px;
+            box-shadow: 0 4px 8px rgba(0,0,0,0.2);
+        }
+
+        nav ul li:hover .submenu {
+            display: block;
+        }
+
+        .submenu li {
+            margin: 0;
+            text-align: left;
+        }
+
+        .submenu li a {
+            padding: 8px 20px;
+            color: var(--color-light);
+            font-weight: normal;
+            transition: background-color 0.3s ease;
+        }
+
+        .submenu li a:hover {
+            background-color: #5a9c4b; /* Slightly darker green */
+            color: var(--color-primary);
+            transform: none; /* Reset transform for submenu items */
         }
 
         /* Mobile Menu Button */
@@ -187,15 +220,63 @@
             color: var(--color-dark);
         }
 
-        /* Nossas Pizzas Section */
-        .pizza-grid {
+        /* Terms Modal Specific Styles */
+        #termsModal .modal-content {
+            max-width: 700px;
+            text-align: left;
+        }
+
+        #termsModal .modal-content h3 {
+            text-align: center;
+            color: var(--color-primary);
+        }
+
+        #termsModal .modal-content .terms-content {
+            max-height: 400px;
+            overflow-y: auto;
+            margin-bottom: 20px;
+            padding-right: 15px; /* For scrollbar */
+        }
+
+        #termsModal .terms-content p, #termsModal .terms-content li {
+            font-size: 0.95rem;
+            margin-bottom: 10px;
+        }
+
+        #termsModal .terms-content ul {
+            list-style: disc;
+            margin-left: 20px;
+            margin-bottom: 10px;
+        }
+
+        #termsModal .terms-agreement {
+            text-align: center;
+            margin-top: 20px;
+        }
+
+        #termsModal .terms-agreement label {
+            font-size: 1rem;
+            color: var(--color-dark);
+            display: inline-block;
+            margin-left: 10px;
+        }
+
+        #termsModal .terms-agreement button {
+            margin-top: 20px;
+            width: auto;
+            padding: 10px 25px;
+        }
+
+
+        /* Nossas Pizzas Section & Assinatura Plans */
+        .pizza-grid, .subscription-plans-grid, .exclusive-flavors-grid {
             display: grid;
             grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
             gap: 30px;
             margin-top: 30px;
         }
 
-        .pizza-item {
+        .pizza-item, .subscription-plan-item, .exclusive-flavor-item {
             background-color: var(--color-light);
             border: 1px solid var(--color-gray);
             border-radius: 8px;
@@ -205,24 +286,24 @@
             transition: transform 0.3s ease, box-shadow 0.3s ease;
         }
 
-        .pizza-item:hover {
+        .pizza-item:hover, .subscription-plan-item:hover, .exclusive-flavor-item:hover {
             transform: translateY(-5px);
             box-shadow: 0 6px 12px rgba(0,0,0,0.15);
         }
 
-        .pizza-item h4 {
+        .pizza-item h4, .subscription-plan-item h4, .exclusive-flavor-item h4 {
             color: var(--color-primary);
             margin-bottom: 10px;
             font-size: 1.4rem;
         }
 
-        .pizza-item p {
+        .pizza-item p, .subscription-plan-item p, .exclusive-flavor-item p {
             font-size: 0.95rem;
             color: #555;
             margin-bottom: 5px;
         }
 
-        .pizza-item .price {
+        .pizza-item .price, .subscription-plan-item .price, .exclusive-flavor-item .price {
             font-weight: bold;
             color: var(--color-secondary);
             margin-top: 10px;
@@ -234,9 +315,21 @@
             color: #777;
             margin-top: 5px;
         }
+        
+        .subscription-plan-item ul {
+            list-style: none; /* Remove default list style */
+            padding: 0;
+            margin-top: 10px;
+        }
+
+        .subscription-plan-item ul li {
+            margin-bottom: 5px;
+            font-size: 0.9rem;
+            color: #666;
+        }
 
         /* Pedidos Section */
-        #pedidos form {
+        #pedidos form, #assinatura form {
             background-color: var(--color-light);
             padding: 30px;
             border-radius: 15px;
@@ -246,7 +339,7 @@
             text-align: left;
         }
 
-        #pedidos label {
+        #pedidos label, #assinatura label {
             display: block;
             margin-bottom: 8px;
             font-weight: bold;
@@ -255,7 +348,12 @@
 
         #pedidos select,
         #pedidos input[type="number"],
-        #pedidos input[type="text"] {
+        #pedidos input[type="text"],
+        #pedidos input[type="email"], /* Added for email field consistency */
+        #assinatura select,
+        #assinatura input[type="number"],
+        #assinatura input[type="text"],
+        #assinatura input[type="email"] { /* Added for email field consistency */
             width: calc(100% - 20px);
             padding: 10px;
             margin-bottom: 20px;
@@ -265,21 +363,23 @@
             background-color: var(--color-light);
         }
 
-        #pedidos input[type="checkbox"] {
+        #pedidos input[type="checkbox"], #assinatura input[type="checkbox"] {
             margin-right: 10px;
         }
 
-        #pedidos .form-group {
+        #pedidos .form-group, #assinatura .form-group {
             margin-bottom: 20px;
         }
 
-        #pedidos .radio-group label {
+        #pedidos .radio-group label, #assinatura .radio-group label {
             display: inline-block;
             margin-right: 20px;
         }
 
         #pedidos .pizza-selection-group,
-        #pedidos .borda-selection-group {
+        #pedidos .borda-selection-group,
+        #assinatura .pizza-selection-group,
+        #assinatura .borda-selection-group {
             border: 1px solid var(--color-gray);
             padding: 15px;
             border-radius: 10px;
@@ -288,21 +388,23 @@
         }
 
         #pedidos .pizza-selection-group h4,
-        #pedidos .borda-selection-group h4 {
+        #pedidos .borda-selection-group h4,
+        #assinatura .pizza-selection-group h4,
+        #assinatura .borda-selection-group h4 {
             color: var(--color-secondary);
             margin-top: 0;
             margin-bottom: 15px;
             font-size: 1.2rem;
         }
 
-        #pedidos .item-selection {
+        #pedidos .item-selection, #assinatura .item-selection {
             display: flex;
             align-items: center;
             margin-bottom: 10px;
             flex-wrap: wrap;
         }
 
-        #pedidos .item-selection label {
+        #pedidos .item-selection label, #assinatura .item-selection label {
             margin-bottom: 0;
             flex: 1;
             white-space: nowrap;
@@ -310,14 +412,19 @@
             text-overflow: ellipsis;
         }
 
-        #pedidos .item-selection input[type="number"] {
+        #pedidos .item-selection input[type="number"], #assinatura .item-selection input[type="number"] {
             width: 70px;
             margin-left: 10px;
             margin-bottom: 0;
             text-align: center;
         }
 
-        #pedidos button {
+        #pedidos .item-selection label[for^="brotinho"], #assinatura .item-selection label[for^="brotinho"] {
+            margin-left: 0;
+            margin-top: 5px; /* Added for alignment in mobile view */
+        }
+
+        #pedidos button, #assinatura button {
             background-color: var(--color-primary);
             color: var(--color-light);
             padding: 15px 30px;
@@ -329,12 +436,12 @@
             width: 100%;
         }
 
-        #pedidos button:hover {
+        #pedidos button:hover, #assinatura button:hover {
             background-color: #8c2121;
             transform: translateY(-2px);
         }
 
-        #orderSummary {
+        #orderSummary, #subscriptionSummary {
             background-color: var(--color-light);
             padding: 20px;
             border-radius: 10px;
@@ -346,10 +453,39 @@
             display: none; /* Hidden by default */
         }
 
-        #orderSummary h4 {
-            color: var(--color-secondary);
+        #orderSummary p, #subscriptionSummary p {
             margin-bottom: 10px;
         }
+
+        #orderSummary .summary-buttons {
+            display: flex;
+            gap: 15px;
+            margin-top: 20px;
+        }
+
+        #orderSummary .summary-buttons button {
+            flex: 1;
+            padding: 10px 15px;
+            font-size: 1rem;
+            border-radius: 5px;
+        }
+
+        #orderSummary .summary-buttons #confirmOrderButton {
+            background-color: var(--color-secondary);
+        }
+
+        #orderSummary .summary-buttons #confirmOrderButton:hover {
+            background-color: #3d7931;
+        }
+
+        #orderSummary .summary-buttons #cancelOrderButton {
+            background-color: #777;
+        }
+
+        #orderSummary .summary-buttons #cancelOrderButton:hover {
+            background-color: #555;
+        }
+
 
         /* Contact Section */
         #contato .contact-info {
@@ -449,6 +585,7 @@
             text-align: center;
             padding: 20px 0;
             margin-top: 40px;
+            position: relative; /* For absolute positioning of cancel form */
         }
 
         footer p {
@@ -465,6 +602,93 @@
 
         footer a:hover {
             color: var(--color-primary);
+        }
+
+        #cancel-subscription-footer {
+            margin-top: 30px;
+            padding: 20px;
+            background-color: rgba(255, 255, 255, 0.1);
+            border-radius: 8px;
+            max-width: 400px;
+            margin: 30px auto 0 auto; /* Center it */
+        }
+
+        #cancel-subscription-footer label {
+            display: block;
+            margin-bottom: 10px;
+            font-weight: bold;
+            color: var(--color-light);
+        }
+
+        #cancel-subscription-footer input[type="text"] {
+            width: calc(100% - 20px);
+            padding: 10px;
+            margin-bottom: 15px;
+            border: 1px solid var(--color-secondary);
+            border-radius: 8px;
+            font-size: 1rem;
+            background-color: var(--color-light);
+            color: var(--color-dark);
+        }
+
+        #cancel-subscription-footer button {
+            background-color: var(--color-primary);
+            color: var(--color-light);
+            padding: 10px 20px;
+            border: none;
+            border-radius: 8px;
+            font-size: 1rem;
+            cursor: pointer;
+            transition: background-color 0.3s ease, transform 0.2s ease;
+            width: 100%;
+        }
+
+        #cancel-subscription-footer button:hover {
+            background-color: #8c2121;
+            transform: translateY(-2px);
+        }
+
+        /* New Sections for Assinatura Submenu */
+        #categorias-descontos, #vantagens-planos, #info-entregas, #sabores-exclusivos {
+            padding: 40px 0;
+            text-align: center;
+        }
+
+        #categorias-descontos ul, #vantagens-planos ul, #info-entregas ul {
+            list-style: none;
+            padding: 0;
+            margin-top: 20px;
+            text-align: left;
+            display: inline-block; /* To center the list */
+        }
+
+        #categorias-descontos li, #vantagens-planos li, #info-entregas li {
+            margin-bottom: 10px;
+            font-size: 1.1rem;
+        }
+
+        #info-entregas table {
+            width: 80%;
+            margin: 20px auto;
+            border-collapse: collapse;
+            background-color: var(--color-light);
+            box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+        }
+
+        #info-entregas th, #info-entregas td {
+            border: 1px solid var(--color-gray);
+            padding: 12px 15px;
+            text-align: left;
+        }
+
+        #info-entregas th {
+            background-color: var(--color-secondary);
+            color: var(--color-light);
+            font-weight: bold;
+        }
+
+        #info-entregas tr:nth-child(even) {
+            background-color: #f2f2f2;
         }
 
         /* Responsiveness */
@@ -492,6 +716,19 @@
                 margin: 10px 0;
             }
 
+            .submenu {
+                position: static; /* Make submenu display inline with parent on mobile */
+                transform: none;
+                width: 100%;
+                box-shadow: none;
+                background-color: #6a9c5b; /* Slightly different background for clarity */
+            }
+
+            nav ul li:hover .submenu {
+                display: flex; /* Display as column for mobile */
+                flex-direction: column;
+            }
+
             .menu-toggle {
                 display: flex;
             }
@@ -511,24 +748,33 @@
                 margin: 10% auto;
             }
 
-            .pizza-grid {
+            .pizza-grid, .subscription-plans-grid, .exclusive-flavors-grid {
                 grid-template-columns: 1fr;
             }
 
-            #pedidos .item-selection {
+            #pedidos .item-selection, #assinatura .item-selection {
                 flex-direction: column;
                 align-items: flex-start;
             }
 
-            #pedidos .item-selection input[type="number"] {
+            #pedidos .item-selection input[type="number"], #assinatura .item-selection input[type="number"] {
                 width: 100%;
                 margin-left: 0;
                 margin-top: 5px;
             }
 
-            #pedidos .item-selection label[for^="brotinho"] {
+            #pedidos .item-selection label[for^="brotinho"], #assinatura .item-selection label[for^="brotinho"] {
                 margin-left: 0;
                 margin-top: 5px;
+            }
+
+            #info-entregas table {
+                width: 100%;
+                font-size: 0.9em;
+            }
+
+            #info-entregas th, #info-entregas td {
+                padding: 8px;
             }
         }
     </style>
@@ -540,6 +786,57 @@
             <h3>Bem-vindo(a) à Kakau Pizzas!</h3>
             <p><span class="highlight-text">Mês de inauguração da Kakau Pizzas: Cucina artigianale e pizzeria.</span> Na compra de três pizzas, ganhe um brotinho doce no sabor que você desejar!</p>
             <p>Clique em qualquer lugar para continuar.</p>
+        </div>
+    </div>
+
+    <div id="termsModal" class="modal" style="display: none;">
+        <div class="modal-content">
+            <h3>Termos e Condições da Assinatura Kakau Pizzas</h3>
+            <div class="terms-content">
+                <p>Por favor, leia atentamente os termos e condições antes de prosseguir com a assinatura.</p>
+                
+                <h4>1. Do Objeto do Contrato</h4>
+                <p>1.1. Este contrato tem por objeto a prestação de serviços de fornecimento de pizzas e/ou kits de pizzas pela Kakau Pizzas, mediante planos de assinatura mensal escolhidos pelo CONTRATANTE.</p>
+
+                <h4>2. Dos Planos e Valores</h4>
+                <p>2.1. Os detalhes de cada plano (Sabor Experimental, Tamanho Família, Plus & Bis, Modena, Sub-Zero, Empresarial), incluindo valores, quantidades de produtos e frequência de entrega, estão descritos na seção "Assinatura" do site.</p>
+                <p>2.2. Os valores das assinaturas são mensais e podem ser pagos à vista ou parcelados via PIX, conforme opções disponíveis no momento da contratação.</p>
+                <p>2.3. Para o Plano Empresarial, o preço será definido mediante consulta e negociação direta, com descontos progressivos para grandes volumes.</p>
+
+                <h4>3. Do Pagamento</h4>
+                <p>3.1. O pagamento da primeira parcela é devido no ato da contratação da assinatura, servindo como ativação do serviço.</p>
+                <p>3.2. As parcelas subsequentes terão vencimento a cada 30 (trinta) dias contados a partir da data do último pagamento realizado.</p>
+                <p>3.3. O não pagamento da assinatura na data de vencimento ou o atraso das parcelas resultará na suspensão imediata do recebimento dos produtos, sem prejuízo da cobrança dos valores devidos.</p>
+                <p>3.4. A Kakau Pizzas se reserva o direito de acionar os meios legais cabíveis para a cobrança de débitos não quitados, conforme as leis brasileiras.</p>
+
+                <h4>4. Das Entregas</h4>
+                <p>4.1. As entregas serão realizadas conforme a frequência e as condições estabelecidas para cada plano de assinatura e as informações de entrega fornecidas pelo CONTRATANTE.</p>
+                <p>4.2. É responsabilidade do CONTRATANTE garantir que haja alguém para receber os produtos no endereço e horário acordados. Em caso de ausência, novas tentativas de entrega poderão ser cobradas ou os produtos poderão ser devolvidos, sem direito a reembolso.</p>
+                <p>4.3. As informações sobre as áreas de entrega e taxas de frete estão disponíveis na seção "Entregas" do site.</p>
+
+                <h4>5. Do Cancelamento</h4>
+                <p>5.1. O CONTRATANTE poderá solicitar o cancelamento da assinatura a qualquer momento, utilizando o formulário de cancelamento disponível no rodapé do site ou entrando em contato pelos canais de atendimento.</p>
+                <p>5.2. O cancelamento será efetivado após a confirmação do recebimento da solicitação e não dará direito a reembolso de valores já pagos, caso o serviço referente ao período já tenha sido iniciado.</p>
+                <p>5.3. Débitos pendentes deverão ser quitados mesmo após a solicitação de cancelamento.</p>
+
+                <h4>6. Da Suspensão e Interrupção do Serviço</h4>
+                <p>6.1. A Kakau Pizzas reserva-se o direito de suspender ou interromper o fornecimento dos produtos em caso de: a) Inadimplência do CONTRATANTE; b) Impossibilidade de contato com o CONTRATANTE; c) Força maior ou caso fortuito.</p>
+
+                <h4>7. Do Código de Defesa do Consumidor</h4>
+                <p>7.1. Este contrato é regido pelas leis brasileiras, em especial o Código de Defesa do Consumidor (Lei nº 8.078/90), assegurando os direitos e obrigações de ambas as partes.</p>
+
+                <h4>8. Das Disposições Finais</h4>
+                <p>8.1. Ao assinar um plano, o CONTRATANTE declara ter lido e concordado com todos os termos e condições aqui estabelecidos.</p>
+                <p>8.2. Quaisquer alterações nestes termos serão comunicadas previamente ao CONTRATANTE.</p>
+                <p>8.3. Fica eleito o foro da comarca de Poxoréu, Mato Grosso, para dirimir quaisquer dúvidas ou litígios decorrentes deste contrato, com renúncia a qualquer outro, por mais privilegiado que seja.</p>
+
+                <p style="font-weight: bold; margin-top: 20px;">Ao clicar em "Eu concordo", você aceita os termos acima e procede para a finalização da sua assinatura.</p>
+            </div>
+            <div class="terms-agreement">
+                <input type="checkbox" id="agreeTerms">
+                <label for="agreeTerms">Eu concordo com os Termos e Condições da Assinatura.</label><br>
+                <button type="button" id="proceedSubscriptionButton" disabled>Prosseguir para Assinatura</button>
+            </div>
         </div>
     </div>
 
@@ -561,6 +858,16 @@
                 <li><a href="#sobre-nos">Sobre nós</a></li>
                 <li><a href="#nossas-pizzas">Nossas Pizzas</a></li>
                 <li><a href="#pedidos">Pedidos</a></li>
+                <li>
+                    <a href="#assinatura">Assinatura</a>
+                    <ul class="submenu">
+                        <li><a href="#planos-assinatura">Planos de Assinatura</a></li>
+                        <li><a href="#sabores-exclusivos">Sabores Exclusivos</a></li>
+                        <li><a href="#categorias-descontos">Categorias das Assinaturas e Descontos</a></li>
+                        <li><a href="#vantagens-planos">Vantagens e Planos</a></li>
+                        <li><a href="#info-entregas">Entregas</a></li>
+                    </ul>
+                </li>
                 <li><a href="#contato">Contato</a></li>
             </ul>
         </div>
@@ -598,56 +905,68 @@
                 <h4>Pizzas Salgadas</h4>
                 <div class="pizza-grid">
                     <div class="pizza-item">
-                        <h4>1. Mussarela Tradicional</h4>
-                        <p>Molho de tomate, mussarela, azeitonas e orégano.</p>
+                        <h4>1. Muçarela Tradicional</h4>
+                        <p>Molho de tomate, muçarela, azeitonas e orégano.</p>
                         <p class="price">Tamanho médio/grande: R$55,00</p>
                         <p class="brotinho-price">Versão Brotinho (25cm - 4 fatias): R$19,25</p>
                     </div>
                     <div class="pizza-item">
                         <h4>2. Calabresa</h4>
-                        <p>Molho de tomate, mussarela, linguiça calabresa fatiada, cebola e orégano.</p>
+                        <p>Molho de tomate, muçarela, linguiça calabresa fatiada, cebola e orégano.</p>
                         <p class="price">Tamanho médio/grande: R$60,00</p>
                         <p class="brotinho-price">Versão Brotinho (25cm - 4 fatias): R$21,00</p>
                     </div>
                     <div class="pizza-item">
                         <h4>3. Presunto e Queijo</h4>
-                        <p>Molho de tomate, mussarela, presunto fatiado/picado e orégano.</p>
+                        <p>Molho de tomate, muçarela, presunto fatiado/picado e orégano.</p>
                         <p class="price">Tamanho médio/grande: R$58,00</p>
                         <p class="brotinho-price">Versão Brotinho (25cm - 4 fatias): R$20,30</p>
                     </div>
                     <div class="pizza-item">
                         <h4>4. Vegetariano de Legumes</h4>
-                        <p>Molho de tomate, mussarela, ervilha, cenoura, batata e orégano.</p>
+                        <p>Molho de tomate, muçarela, ervilha, cenoura, batata e orégano.</p>
                         <p class="price">Tamanho médio/grande: R$60,00</p>
                         <p class="brotinho-price">Versão Brotinho (25cm - 4 fatias): R$21,00</p>
                     </div>
                     <div class="pizza-item">
                         <h4>5. Portuguesa (Especial da Kakau)</h4>
-                        <p>Molho de tomate, mussarela, presunto, ovos cozidos picados, cebola em rodelas, azeitonas e orégano.</p>
+                        <p>Molho de tomate, muçarela, presunto, ovos cozidos picados, cebola em rodelas, azeitonas e orégano.</p>
                         <p class="price">Tamanho médio/grande: R$67,00</p>
                         <p class="brotinho-price">Versão Brotinho (25cm - 4 fatias): R$23,45</p>
+                    </div>
+                    <div class="pizza-item">
+                        <h4>6. Frango tradicional</h4>
+                        <p>Frango desfiado com catupiry, molho de tomate e orégano.</p>
+                        <p class="price">Tamanho médio/grande: R$62,00</p>
+                        <p class="brotinho-price">Versão Brotinho (25cm - 4 fatias): R$21,70</p>
                     </div>
                 </div>
 
                 <h4 style="margin-top: 40px;">Pizzas Doces</h4>
                 <div class="pizza-grid">
                     <div class="pizza-item">
-                        <h4>6. Chocolate</h4>
+                        <h4>7. Chocolate</h4>
                         <p>Chocolate ao leite e granulado.</p>
                         <p class="price">Tamanho médio/grande: R$45,00</p>
                         <p class="brotinho-price">Versão Brotinho (25cm - 4 fatias): R$15,75</p>
                     </div>
                     <div class="pizza-item">
-                        <h4>7. Doce Pecado</h4>
+                        <h4>8. Doce Pecado</h4>
                         <p>Morango em cortes e chocolate ao leite.</p>
                         <p class="price">Tamanho médio/grande: R$55,00</p>
                         <p class="brotinho-price">Versão Brotinho (25cm - 4 fatias): R$19,25</p>
                     </div>
                     <div class="pizza-item">
-                        <h4>8. Romeu e Julieta</h4>
+                        <h4>9. Romeu e Julieta</h4>
                         <p>Doce de goiabada e queijo.</p>
                         <p class="price">Tamanho médio/grande: R$43,00</p>
                         <p class="brotinho-price">Versão Brotinho (25cm - 4 fatias): R$15,05</p>
+                    </div>
+                    <div class="pizza-item">
+                        <h4>10. M&M</h4>
+                        <p>Chocolate ao leite e m&m's.</p>
+                        <p class="price">Tamanho médio/grande: R$48,00</p>
+                        <p class="brotinho-price">Versão Brotinho (25cm - 4 fatias): R$16,80</p>
                     </div>
                 </div>
             </div>
@@ -674,48 +993,68 @@
                     <div class="pizza-selection-group" id="salgadaPizzas">
                         <h4>Pizzas Salgadas</h4>
                         <div class="item-selection">
-                            <label for="qtyMussarela">1. Mussarela Tradicional (R$55,00 / Brotinho R$19,25)</label>
+                            <label for="qtyMussarela">1. Muçarela Tradicional (R$55,00 / Brotinho R$19,25)</label>
                             <input type="number" id="qtyMussarela" min="0" value="0" data-price="55.00" data-brotinho-price="19.25">
-                            <input type="checkbox" id="brotinhoMussarela"> <label for="brotinhoMussarela" style="flex: none; margin-left: 5px;">Brotinho</label>
+                            <input type="checkbox" id="brotinhoMussarela">
+                            <label for="brotinhoMussarela" style="flex: none; margin-left: 5px;">Brotinho</label>
                         </div>
                         <div class="item-selection">
                             <label for="qtyCalabresa">2. Calabresa (R$60,00 / Brotinho R$21,00)</label>
                             <input type="number" id="qtyCalabresa" min="0" value="0" data-price="60.00" data-brotinho-price="21.00">
-                            <input type="checkbox" id="brotinhoCalabresa"> <label for="brotinhoCalabresa" style="flex: none; margin-left: 5px;">Brotinho</label>
+                            <input type="checkbox" id="brotinhoCalabresa">
+                            <label for="brotinhoCalabresa" style="flex: none; margin-left: 5px;">Brotinho</label>
                         </div>
                         <div class="item-selection">
                             <label for="qtyPresunto">3. Presunto e Queijo (R$58,00 / Brotinho R$20,30)</label>
                             <input type="number" id="qtyPresunto" min="0" value="0" data-price="58.00" data-brotinho-price="20.30">
-                            <input type="checkbox" id="brotinhoPresunto"> <label for="brotinhoPresunto" style="flex: none; margin-left: 5px;">Brotinho</label>
+                            <input type="checkbox" id="brotinhoPresunto">
+                            <label for="brotinhoPresunto" style="flex: none; margin-left: 5px;">Brotinho</label>
                         </div>
                         <div class="item-selection">
                             <label for="qtyVegetariano">4. Vegetariano de Legumes (R$60,00 / Brotinho R$21,00)</label>
                             <input type="number" id="qtyVegetariano" min="0" value="0" data-price="60.00" data-brotinho-price="21.00">
-                            <input type="checkbox" id="brotinhoVegetariano"> <label for="brotinhoVegetariano" style="flex: none; margin-left: 5px;">Brotinho</label>
+                            <input type="checkbox" id="brotinhoVegetariano">
+                            <label for="brotinhoVegetariano" style="flex: none; margin-left: 5px;">Brotinho</label>
                         </div>
                         <div class="item-selection">
                             <label for="qtyPortuguesa">5. Portuguesa (R$67,00 / Brotinho R$23,45)</label>
                             <input type="number" id="qtyPortuguesa" min="0" value="0" data-price="67.00" data-brotinho-price="23.45">
-                            <input type="checkbox" id="brotinhoPortuguesa"> <label for="brotinhoPortuguesa" style="flex: none; margin-left: 5px;">Brotinho</label>
+                            <input type="checkbox" id="brotinhoPortuguesa">
+                            <label for="brotinhoPortuguesa" style="flex: none; margin-left: 5px;">Brotinho</label>
+                        </div>
+                        <div class="item-selection">
+                            <label for="qtyFrangoTradicional">6. Frango tradicional (R$62,00 / Brotinho R$21,70)</label>
+                            <input type="number" id="qtyFrangoTradicional" min="0" value="0" data-price="62.00" data-brotinho-price="21.70">
+                            <input type="checkbox" id="brotinhoFrangoTradicional">
+                            <label for="brotinhoFrangoTradicional" style="flex: none; margin-left: 5px;">Brotinho</label>
                         </div>
                     </div>
 
                     <div class="pizza-selection-group" id="docePizzas" style="display: none;">
                         <h4>Pizzas Doces</h4>
                         <div class="item-selection">
-                            <label for="qtyChocolate">6. Chocolate (R$45,00 / Brotinho R$15,75)</label>
+                            <label for="qtyChocolate">7. Chocolate (R$45,00 / Brotinho R$15,75)</label>
                             <input type="number" id="qtyChocolate" min="0" value="0" data-price="45.00" data-brotinho-price="15.75">
-                            <input type="checkbox" id="brotinhoChocolate"> <label for="brotinhoChocolate" style="flex: none; margin-left: 5px;">Brotinho</label>
+                            <input type="checkbox" id="brotinhoChocolate">
+                            <label for="brotinhoChocolate" style="flex: none; margin-left: 5px;">Brotinho</label>
                         </div>
                         <div class="item-selection">
-                            <label for="qtyDocePecado">7. Doce Pecado (R$55,00 / Brotinho R$19,25)</label>
+                            <label for="qtyDocePecado">8. Doce Pecado (R$55,00 / Brotinho R$19,25)</label>
                             <input type="number" id="qtyDocePecado" min="0" value="0" data-price="55.00" data-brotinho-price="19.25">
-                            <input type="checkbox" id="brotinhoDocePecado"> <label for="brotinhoDocePecado" style="flex: none; margin-left: 5px;">Brotinho</label>
+                            <input type="checkbox" id="brotinhoDocePecado">
+                            <label for="brotinhoDocePecado" style="flex: none; margin-left: 5px;">Brotinho</label>
                         </div>
                         <div class="item-selection">
-                            <label for="qtyRomeuJulieta">8. Romeu e Julieta (R$43,00 / Brotinho R$15,05)</label>
+                            <label for="qtyRomeuJulieta">9. Romeu e Julieta (R$43,00 / Brotinho R$15,05)</label>
                             <input type="number" id="qtyRomeuJulieta" min="0" value="0" data-price="43.00" data-brotinho-price="15.05">
-                            <input type="checkbox" id="brotinhoRomeuJulieta"> <label for="brotinhoRomeuJulieta" style="flex: none; margin-left: 5px;">Brotinho</label>
+                            <input type="checkbox" id="brotinhoRomeuJulieta">
+                            <label for="brotinhoRomeuJulieta" style="flex: none; margin-left: 5px;">Brotinho</label>
+                        </div>
+                        <div class="item-selection">
+                            <label for="qtyMM">10. M&M (R$48,00 / Brotinho R$16,80)</label>
+                            <input type="number" id="qtyMM" min="0" value="0" data-price="48.00" data-brotinho-price="16.80">
+                            <input type="checkbox" id="brotinhoMM">
+                            <label for="brotinhoMM" style="flex: none; margin-left: 5px;">Brotinho</label>
                         </div>
                     </div>
 
@@ -744,24 +1083,366 @@
                     </div>
 
                     <div class="form-group">
-                        <label for="deliveryMethod">Forma de Entrega:</label>
-                        <select id="deliveryMethod">
-                            <option value="retirada">Retirada no Local</option>
-                            <option value="delivery">Via Delivery (Taxa R$5,00)</option>
+                        <label for="deliveryLocation">Local de Entrega:</label>
+                        <select id="deliveryLocation">
+                            <option value="retirada" data-price="0.00">Retirada no Local (Grátis)</option>
+                            <option value="centro-paroquia" data-price="9.00">Centro - Próximo à Paróquia São João Batista (R$9,00)</option>
+                            <option value="centro-gazin" data-price="9.00">Centro - Próximo à Loja Gazin (R$9,00)</option>
+                            <option value="centro-posto-bio" data-price="9.00">Centro - Próximo ao Posto do Bio (R$9,00)</option>
+                            <option value="rodoviaria" data-price="9.00">Rodoviária - Próximo à Lanchonete (R$9,00)</option>
+                            <option value="jardim-tropical" data-price="10.00">Jardim Tropical - Próximo à Escola X (R$10,00)</option>
+                            <option value="bela-vista" data-price="13.75">Bairro Bela Vista - Próximo à Igreja Nossa Senhora Aparecida (R$13,75)</option>
+                            <option value="santa-maria" data-price="17.50">Bairro Santa Maria - Próximo ao Supermercado Y (R$17,50)</option>
+                            <option value="alto-coite" data-price="30.00">Alto Coité - Próximo à Igreja Bom Jesus (R$30,00)</option>
+                            <option value="zona-rural" data-price="45.00">Zona Rural - Região Poxoréu (R$45,00)</option>
+                            <option value="primavera-rondonopolis" data-price="80.00">Primavera do Leste e Rondonópolis - Promocional para Assinantes(R$80,00)</option>
                         </select>
                     </div>
+                    
+                    <div class="form-group">
+                        <label for="customerName">Seu Nome:</label>
+                        <input type="text" id="customerName" required>
+                    </div>
 
-                    <button type="submit">Finalizar Pedido</button>
+                    <div class="form-group">
+                        <label for="customerPhone">Seu Telefone Celular (com DDD):</label>
+                        <input type="text" id="customerPhone" placeholder="(XX) 9XXXX-XXXX" maxlength="15" required>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="customerCpf">Seu CPF:</label>
+                        <input type="text" id="customerCpf" placeholder="XXX.XXX.XXX-XX" maxlength="14" required>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="customerCnpj" style="display: none;">Seu CNPJ (opcional para empresas):</label>
+                        <input type="text" id="customerCnpj" placeholder="XX.XXX.XXX/XXXX-XX" maxlength="18" style="display: none;">
+                    </div>
+
+                    <button type="submit" id="submitOrderButton">Finalizar Pedido</button>
                 </form>
 
                 <div id="orderSummary" class="container">
                     <h4>Resumo do Pedido</h4>
                     <p id="summaryDetails"></p>
                     <p>Total a pagar: <span id="totalPrice">R$0,00</span></p>
-                    <p class="highlight-text">Pagamento via PIX. Chave PIX: <strong style="color: var(--color-primary);">66992115947</strong> (telefone).</p>
-                    <p>Por favor, envie o comprovante de pagamento PIX junto ao pedido via WhatsApp. Seu pedido só será produzido mediante o comprovante.</p>
-                    <p>Se o pagamento for feito em até <span class="highlight-text">15 minutos</span> após a solicitação do pedido, você receberá um desconto de <span class="highlight-text">R$1,00!</span></p>
+                    <p class="highlight-text">Pagamento via PIX. Chave PIX: <strong style="font-weight: bold;">66.99211-5947</strong> (Celular)</p>
+                    <p>Ao *Confirmar Pedido*, o _resumo será enviado diretamente para o nosso WhatsApp_ para _agilizar o processo_.</p>
+                    <div class="summary-buttons">
+                        <button type="button" id="confirmOrderButton">Confirmar Pedido</button>
+                        <button type="button" id="cancelOrderButton">Cancelar Pedido</button>
+                    </div>
                 </div>
+            </div>
+        </section>
+
+        <hr>
+
+        <section id="assinatura">
+            <div class="container">
+                <h3>Assinatura de Planos</h3>
+                
+                <div id="planos-assinatura">
+                    <p><strong>Pizza por Assinatura: Sabores Exclusivos para Você!</strong></p>
+                    <p>Apresentamos nosso novo serviço de assinatura de pizzas, trazendo a você uma experiência gastronômica única com sabores que você só encontra aqui na Kakau Pizzas. Desfrute de conveniência e exclusividade com nossas opções de planos pensadas para o seu paladar e seu bolso.</p>
+                    
+                    <h4>Nossos Planos de Assinatura</h4>
+                    <div class="subscription-plans-grid">
+                        <div class="subscription-plan-item">
+                            <h4>1. Assinatura Plano: Sabor Experimental</h4>
+                            <p>Para quem deseja saborear as pizzas de todos os sabores disponíveis, com direito a 2 fatias de pizza por sabor. O valor da pizza é apenas por fatia.</p>
+                            <ul>
+                                <li><strong>Valor por fatia:</strong> R$15,00 (mínimo de 4 fatias)</li>
+                                <li><strong>Assinatura Mensal (até 16 fatias/mês):</strong> R$200,00</li>
+                                <li><strong>Opções de Pagamento PIX:</strong> À vista (R$200,00) ou Parcelado em 2x de R$100,00 ou 4x de R$50,00.</li>
+                            </ul>
+                        </div>
+                        <div class="subscription-plan-item">
+                            <h4>2. Assinatura Plano: Tamanho Família</h4>
+                            <p>Para quem deseja saborear as pizzas em família aos finais de semana. Inclui um refrigerante de 2,0L (Coca-cola ou Guaraná).</p>
+                            <ul>
+                                <li><strong>Valor por pizza (média/grande) + Refri:</strong> R$85,00</li>
+                                <li><strong>Assinatura Mensal (1 pizza/semana):</strong> R$340,00</li>
+                                <li><strong>Opções de Pagamento PIX:</strong> À vista (R$340,00) ou Parcelado em 2x de R$170,00 ou 4x de R$85,00.</li>
+                            </ul>
+                        </div>
+                        <div class="subscription-plan-item">
+                            <h4>3. Assinatura Plano: Plus & Bis</h4>
+                            <p>Para quem deseja saborear as pizzas com o acompanhamento de mais um brotinho no sabor doce (servindo 4 fatias).</p>
+                            <ul>
+                                <li><strong>Valor por pizza + Brotinho Doce:</strong> R$95,00</li>
+                                <li><strong>Assinatura Mensal (1 pizza/semana + brotinho):</strong> R$380,00</li>
+                                <li><strong>Opções de Pagamento PIX:</strong> À vista (R$380,00) ou Parcelado em 2x de R$190,00 ou 4x de R$95,00.</li>
+                            </ul>
+                        </div>
+                        <div class="subscription-plan-item">
+                            <h4>4. Assinatura Plano: Modena</h4>
+                            <p>Para amantes e viciados em pizza. Para quem deseja ter o plano de experiência em dobro. O cliente receberá duas pizzas sobre nossos sabores disponíveis, com o acompanhamento de um refrigerante 2,0L (Coca-cola ou Guaraná) e mais um brotinho doce, incluso.</p>
+                            <ul>
+                                <li><strong>Valor (2 pizzas + Refri + Brotinho):</strong> R$150,00</li>
+                                <li><strong>Assinatura Mensal (2 pizzas/semana + acompanhamentos):</strong> R$600,00</li>
+                                <li><strong>Opções de Pagamento PIX:</strong> À vista (R$600,00) ou Parcelado em 2x de R$300,00 ou 4x de R$150,00.</li>
+                            </ul>
+                        </div>
+                        <div class="subscription-plan-item">
+                            <h4>5. Assinatura Plano: Sub-Zero</h4>
+                            <p>Para quem deseja receber as pizzas Congeladas para consumo a qualquer hora do dia. Essa assinatura é para quem deseja ter acesso ao nosso Combo Completo com um valor de desconto mais acessível (15% de desconto sobre o Plano Modena).</p>
+                            <ul>
+                                <li><strong>Valor por kit congelado (2 pizzas + Refri + Brotinho):</strong> R$127,50</li>
+                                <li><strong>Assinatura Mensal (4 kits Modena congelados/mês):</strong> R$510,00</li>
+                                <li><strong>Opções de Pagamento PIX:</strong> À vista (R$510,00) ou Parcelado em 2x de R$255,00 ou 4x de R$127,50.</li>
+                            </ul>
+                        </div>
+                        <div class="subscription-plan-item">
+                            <h4>6. Assinatura Plano: Empresarial</h4>
+                            <p>Para pequenas, médias e grandes empresas que desejam ter nossos serviços como fornecedor. Ideal para Hotéis, Cafés, Locais de Coworking, Estúdios de criativos e demais empresas interessadas em disponibilizar uma boa pizza para parceiros e funcionários.</p>
+                            <ul>
+                                <li><strong>Preço sob consulta:</strong> Descontos progressivos para pedidos acima de 10 pizzas.</li>
+                                <li>O não pagamento da sua assinatura na data de vencimento ou o atraso das parcelas resultará na suspensão imediata do recebimento das pizzas.</li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+
+                <div id="sabores-exclusivos" style="display: block;">
+                    <h4 style="margin-top: 40px;">Sabores Exclusivos para Assinantes</h4>
+                    <p>Desfrute de uma seleção especial de pizzas que são exclusivas para nossos assinantes, com sabores que você só encontra aqui na Kakau Pizzas!</p>
+                    <div class="exclusive-flavors-grid">
+                        <div class="exclusive-flavor-item">
+                            <h4>Café</h4>
+                            <p>Uma inusitada combinação que promete surpreender seu paladar.</p>
+                            <p class="price">Preço por pizza: R$38,00</p>
+                        </div>
+                        <div class="exclusive-flavor-item">
+                            <h4>Pepperone</h4>
+                            <p>Muçarela, pepperoni, molho de tomate, parmesão e manjericão.</p>
+                            <p class="price">Preço por pizza: R$40,00</p>
+                        </div>
+                        <div class="exclusive-flavor-item">
+                            <h4>Casabona</h4>
+                            <p>Molho de tomate feito na casa, muçarela, brie e crispy de parma e mel.</p>
+                            <p class="price">Preço por pizza: R$62,00</p>
+                        </div>
+                        <div class="exclusive-flavor-item">
+                            <h4>Boscaiola</h4>
+                            <p>Molho bechamel, muçarela, mix de cogumelos frescos, calabresa artesanal, pimenta calabresa e manjericão.</p>
+                            <p class="price">Preço por fatia: R$17,00 / Pizza inteira: R$68,00</p>
+                        </div>
+                        <div class="exclusive-flavor-item">
+                            <h4>Pizzas Rolls</h4>
+                            <p>Massa de pizza enrolada e recheada de 4 Formaggi ou Calabresa com Catupiry. Acompanham molho marinara.</p>
+                            <p class="price">Preço por pizza: R$48,00</p>
+                        </div>
+                        <div class="exclusive-flavor-item">
+                            <h4>Pizzeta de Massa Fina (Low Carb) - Parmesão e Alecrim</h4>
+                            <p>Massa proteica low carb com parmesão e alecrim.</p>
+                            <p class="price">Preço por pizza: R$49,00</p>
+                        </div>
+                        <div class="exclusive-flavor-item">
+                            <h4>Pizzeta de Massa Fina (Low Carb) - Queijo de Cabra e Cogumelos</h4>
+                            <p>Massa proteica low carb com queijo de cabra e cogumelos.</p>
+                            <p class="price">Preço por pizza: R$65,00</p>
+                        </div>
+                    </div>
+                </div>
+
+
+                <form id="subscriptionForm">
+                    <div class="form-group">
+                        <label for="subscriptionPlan">Escolha seu Plano:</label>
+                        <select id="subscriptionPlan">
+                            <option value="">-- Selecione um plano --</option>
+                            <option value="sabor-experimental" data-price="200.00">1. Sabor Experimental (R$200,00/mês)</option>
+                            <option value="tamanho-familia" data-price="340.00">2. Tamanho Família (R$340,00/mês)</option>
+                            <option value="plus-bis" data-price="380.00">3. Plus & Bis (R$380,00/mês)</option>
+                            <option value="modena" data-price="600.00">4. Modena (R$600,00/mês)</option>
+                            <option value="sub-zero" data-price="510.00">5. Sub-Zero (R$510,00/mês)</option>
+                            <option value="empresarial">6. Empresarial (Consulte)</option>
+                        </select>
+                    </div>
+
+                    <div class="form-group" id="pixInstallmentField" style="display: none;">
+                        <label for="pixInstallment">Parcelamento PIX:</label>
+                        <select id="pixInstallment">
+                            </select>
+                    </div>
+
+                    <div class="form-group" id="cnpjField" style="display: none;">
+                        <label for="companyCnpj">CNPJ da Empresa:</label>
+                        <input type="text" id="companyCnpj" placeholder="XX.XXX.XXX/XXXX-XX" maxlength="18">
+                    </div>
+
+                    <div class="form-group">
+                        <label for="subscriberName">Seu Nome Completo:</label>
+                        <input type="text" id="subscriberName" required>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="subscriberCpf">Seu CPF:</label>
+                        <input type="text" id="subscriberCpf" placeholder="XXX.XXX.XXX-XX" maxlength="14" required>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="subscriberPhone">Seu Telefone Celular (com DDD):</label>
+                        <input type="text" id="subscriberPhone" placeholder="(XX) 9XXXX-XXXX" maxlength="15" required>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="subscriberEmail">Seu E-mail:</label>
+                        <input type="email" id="subscriberEmail" required>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="deliveryAddress">Endereço de Entrega:</label>
+                        <input type="text" id="deliveryAddress" required>
+                    </div>
+
+                    <div class="form-group">
+                        <input type="checkbox" id="acceptTermsCheckbox">
+                        <label for="acceptTermsCheckbox">Eu li e concordo com os <a href="#" id="openTermsModalLink">Termos e Condições da Assinatura</a>.</label>
+                    </div>
+
+                    <button type="submit" id="subscribeButton" disabled>Assinar Plano</button>
+                </form>
+
+                <div id="subscriptionSummary" class="container">
+                    <h4>Resumo da Assinatura</h4>
+                    <p id="subscriptionSummaryDetails"></p>
+                    <p>Total a pagar (primeira parcela): <span id="subscriptionTotalPrice">R$0,00</span></p>
+                    <p class="highlight-text">Pagamento da primeira parcela via PIX. Chave PIX: <strong style="font-weight: bold;">66.99211-5947</strong> (Celular)</p>
+                    <p>Sua solicitação de assinatura foi enviada! O <i>protocolo do seu pedido</i> e os <i>detalhes do plano</i> serão enviados para o seu WhatsApp para _confirmação e agendamento da primeira entrega_.</p>
+                    <p>Por favor, aguarde o contato de nossa equipe. Entraremos em contato para finalizar os detalhes e agendar suas entregas.</p>
+                </div>
+            </div>
+        </section>
+
+        <section id="categorias-descontos" style="display: none;">
+            <div class="container">
+                <h3>Categorias de Assinaturas e Descontos</h3>
+                <p>Oferecemos planos de assinatura para atender a todas as suas necessidades e apetites. Quanto maior o plano, maior o seu desconto!</p>
+                <ul>
+                    <li><strong>Sabor Experimental:</strong> Ideal para quem quer começar.</li>
+                    <li><strong>Tamanho Família:</strong> Perfeito para famílias pequenas.</li>
+                    <li><strong>Plus & Bis:</strong> Mais pizzas, mais variedade.</li>
+                    <li><strong>Modena:</strong> Para os amantes de pizzas clássicas.</li>
+                    <li><strong>Sub-Zero:</strong> Inclui pizzas ultracongeladas.</li>
+                    <li><strong>Empresarial:</strong> Descontos progressivos para grandes volumes.</li>
+                </ul>
+            </div>
+        </section>
+
+        <section id="vantagens-planos" style="display: none;">
+            <div class="container">
+                <h3>Vantagens dos Planos Kakau Pizzas</h3>
+                <p>Ao assinar um de nossos planos, você garante:</p>
+                <ul>
+                    <li>Descontos exclusivos em todas as pizzas.</li>
+                    <li>Entrega programada para sua conveniência.</li>
+                    <li>Acesso a sabores especiais e lançamentos antes de todos.</li>
+                    <li>Opção de pausar ou alterar seu plano a qualquer momento.</li>
+                    <li>Atendimento prioritário ao cliente.</li>
+                </ul>
+                <p>Nossos planos são flexíveis e pensados para o seu conforto.</p>
+            </div>
+        </section>
+
+        <section id="vantagens-planos">
+            <div class="container">
+                <h3>Vantagens e Planos de Assinatura</h3>
+                <p>Ao assinar a Kakau Pizzas, você desfruta de uma série de benefícios:</p>
+                <ul>
+                    <li><b>Exclusividade:</b> Acesse um menu especial de pizzas que não estão disponíveis para pedidos avulsos.</li>
+                    <li><b>Comodidade:</b> Receba suas pizzas preferidas diretamente na sua casa, sem preocupações com pedidos semanais.</li>
+                    <li><b>Economia:</b> Nossos planos de assinatura oferecem um preço por pizza significativamente menor do que a compra individual.</li>
+                    <li><b>Flexibilidade:</b> Escolha o plano que melhor se adapta ao seu estilo de vida (Mensal, Bimestral, Anual).</li>
+                    <li><b>Prioridade:</b> Sua entrega terá preferência, garantindo que sua pizza chegue quentinha e no tempo certo.</li>
+                </ul>
+                <p>Para mais detalhes sobre preços e como personalizar seu plano, entre em contato conosco ou utilize o formulário de assinatura acima.</p>
+            </div>
+        </section>
+
+        <hr>
+
+        <section id="info-entregas">
+            <div class="container">
+                <h3>Informações sobre Entregas</h3>
+                <p>Nosso serviço de delivery é pensado para sua total comodidade. Oferecemos um modelo de cobrança por quilometragem com um valor mínimo, garantindo justiça e clareza nos preços.</p>
+                <p><b>Valor Mínimo:</b> R$9,00 para entregas de até 2.5 km do nosso ponto de partida.</p>
+                <p><b>Acima de 2.5 km:</b> Cobramos um valor adicional de R$2.50 por quilômetro extra rodado.</p>
+
+                <p style="margin-top: 20px;">Confira a tabela de exemplos práticos para entregas em Poxoréu e região:</p>
+                <table>
+                    <thead>
+                        <tr>
+                            <th>Bairro/Região</th>
+                            <th>Ponto de Referência (Exemplo)</th>
+                            <th>Distância Estimada (KM)</th>
+                            <th>Valor do Delivery (R$)</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td>Centro</td>
+                            <td>Paróquia São João Batista</td>
+                            <td>0.5 km</td>
+                            <td>R$ 9,00</td>
+                        </tr>
+                        <tr>
+                            <td>Centro</td>
+                            <td>Loja Gazin</td>
+                            <td>1.2 km</td>
+                            <td>R$ 9,00</td>
+                        </tr>
+                        <tr>
+                            <td>Centro</td>
+                            <td>Posto do Bio</td>
+                            <td>1.8 km</td>
+                            <td>R$ 9,00</td>
+                        </tr>
+                        <tr>
+                            <td>Rodoviária</td>
+                            <td>Lanchonete da Rodoviária</td>
+                            <td>2.5 km</td>
+                            <td>R$ 9,00</td>
+                        </tr>
+                        <tr>
+                            <td>Jardim Tropical</td>
+                            <td></td>
+                            <td>4.0 km</td>
+                            <td>R$ 10,00</td>
+                        </tr>
+                        <tr>
+                            <td>Bairro Bela Vista</td>
+                            <td>Igreja Nossa Senhora Aparecida</td>
+                            <td>5.5 km</td>
+                            <td>R$ 13,75</td>
+                        </tr>
+                        <tr>
+                            <td>Bairro Santa Maria</td>
+                            <td></td>
+                            <td>7.0 km</td>
+                            <td>R$ 17,50</td>
+                        </tr>
+                        <tr>
+                            <td>Alto Coité</td>
+                            <td>Igreja Bom Jesus</td>
+                            <td>12.0 km</td>
+                            <td>R$ 30,00</td>
+                        </tr>
+                        <tr>
+                            <td>Zona Rural</td>
+                            <td></td>
+                            <td>18.0 km</td>
+                            <td>R$ 45,00</td>
+                        </tr>
+                        <tr>
+                            <td colspan="3">Primavera do Leste e Rondonópolis</td>
+                            <td>R$80,00 (Promocional para assinantes)</td>
+                        </tr>
+                    </tbody>
+                </table>
+                <p><b>Horário de Entregas:</b> Nossas entregas são realizadas às Sextas-feiras, Sábados e Domingos, das 17h00 às 22h00.</p>
+                <p>Em caso de dúvidas sobre a entrega do seu pedido ou assinatura, por favor, entre em contato via WhatsApp.</p>
             </div>
         </section>
 
@@ -769,32 +1450,82 @@
 
         <section id="contato">
             <div class="container">
-                <h3>Entre em Contato</h3>
+                <h3>Fale Conosco</h3>
+                <p>Estamos à disposição para atender você. Entre em contato pelos nossos canais:</p>
                 <div class="contact-info">
+   				<div class="contact-item">
+                        <i class="fas fa-map-marker-alt"></i>
+                        <h4>Endereço</h4>
+                        <p>Poxoréu, Mato Grosso</p>
+                    </div>
+                    <div class="contact-item">
+                        <i class="fas fa-clock"></i>
+                        <h4>Horário de Atendimento</h4>
+                        <p>Segunda a Quinta: 17h - 22h (Pedidos)</p>
+                        <p>Sexta a Domingo: 17h - 22h (Entregas)</p>
+                    </div>
                     <div class="contact-item">
                         <i class="fab fa-whatsapp"></i>
-                        <h4>WhatsApp</h4>
-                        <a href="https://wa.me/5566992115947" target="_blank">(66) 9 9211-5947</a>
+                        <p>WhatsApp:</p>
+                        <a href="https://wa.me/5566992115947" target="_blank">(66) 99211-5947</a>
                     </div>
                     <div class="contact-item">
                         <i class="fas fa-envelope"></i>
-                        <h4>E-mail</h4>
-                        <a href="mailto:kakaupizzaria123@gmail.com">kakaupizzaria123@gmail.com</a>
+                        <p>Email:</p>
+                        <a href="mailto:kakaopizzas123@gmail.com">kakaopizza123@gmail.com</a>
                     </div>
                 </div>
+                
+                
+            <form id="contactForm">
+            <label for="contactName">Seu Nome:</label>
+            <input type="text" id="contactName" name="contactName" required>
 
-                <form action="mailto:kakaupizzaria123@gmail.com" method="post" enctype="text/plain">
-                    <label for="nome">Nome Completo:</label>
-                    <input type="text" id="nome" name="Nome" required>
+            <label for="contactEmail">Seu Email:</label>
+            <input type="email" id="contactEmail" name="contactEmail" required>
 
-                    <label for="assunto">Assunto:</label>
-                    <input type="text" id="assunto" name="Assunto" required>
+            <label for="contactSubject">Assunto:</label>
+            <input type="text" id="contactSubject" name="contactSubject" required>
 
-                    <label for="mensagem">Mensagem:</label>
-                    <textarea id="mensagem" name="Mensagem" required></textarea>
+            <label for="contactMessage">Sua Mensagem:</label>
+            <textarea id="contactMessage" name="contactMessage" required></textarea>
 
-                    <button type="submit">Enviar Mensagem</button>
-                </form>
+            <button type="submit">Enviar Mensagem por Email</button>
+        </form>
+    
+
+<script>
+    document.addEventListener('DOMContentLoaded', function() {
+        const contactForm = document.getElementById('contactForm');
+
+        if (contactForm) {
+            contactForm.addEventListener('submit', function(event) {
+                event.preventDefault(); // Prevent default form submission
+
+                const name = document.getElementById('contactName').value;
+                const email = document.getElementById('contactEmail').value;
+                const subject = document.getElementById('contactSubject').value;
+                const message = document.getElementById('contactMessage').value;
+
+                if (name && email && subject && message) {
+                    const recipient = 'kakapizzas123@gmail.com';
+                    const emailSubject = encodeURIComponent(`Contato - ${subject}`);
+                    const emailBody = encodeURIComponent(`Nome: ${name}\nEmail: ${email}\n\nMensagem:\n${message}`);
+
+                    const mailtoLink = `mailto:${recipient}?subject=${emailSubject}&body=${emailBody}`;
+
+                    window.open(mailtoLink, '_blank');
+                    alert('Sua mensagem será aberta em seu cliente de e-mail. Por favor, envie o e-mail para concluir.');
+                    contactForm.reset(); // Clear the form after submission
+                } else {
+                    alert('Por favor, preencha todos os campos do formulário de contato.');
+                }
+            });
+        }
+    });
+</script>
+                
+                
             </div>
         </section>
     </main>
@@ -802,41 +1533,37 @@
     <footer>
         <div class="container">
             <p>&copy; 2025 Kakau Pizzas. Todos os direitos reservados.</p>
-            <p>Siga-nos nas redes sociais:</p>
-            <div>
-                <a href="https://instagram.com/kakau_pizzas" target="_blank"><i class="fab fa-instagram"></i> @kakau_pizzas</a>
-                <a href="mailto:kakaupizzaria123@gmail.com"><i class="fas fa-envelope"></i> kakaupizzaria123@gmail.com</a>
+            <p>
+                <a href="#pedidos">Pedidos</a> | 
+                <a href="#assinatura">Planos de assinatura</a>
+            </p>
+
+            <div id="cancel-subscription-footer">
+                <label for="cancelProtocol">Cancelar Assinatura (digite o protocolo):</label>
+                <input type="text" id="cancelProtocol" placeholder="Ex: PROT-XXXX-YYYY">
+                <button type="button" id="cancelSubscriptionButton">Cancelar Assinatura</button>
             </div>
         </div>
     </footer>
 
     <script>
-        document.addEventListener('DOMContentLoaded', () => {
-            const welcomeModal = document.getElementById('welcomeModal');
+        document.addEventListener('DOMContentLoaded', function() {
+            // Mobile Menu Toggle
             const mobileMenu = document.getElementById('mobile-menu');
             const navbarLinks = document.getElementById('navbar-links');
-            const orderForm = document.getElementById('orderForm');
-            const orderSummary = document.getElementById('orderSummary');
-            const summaryDetails = document.getElementById('summaryDetails');
-            const totalPriceSpan = document.getElementById('totalPrice');
 
-            // Show modal on page load
-            welcomeModal.style.display = 'flex';
-
-            // Close modal on click anywhere
-            welcomeModal.addEventListener('click', () => {
-                welcomeModal.style.display = 'none';
-            });
-
-            // Mobile menu toggle
-            mobileMenu.addEventListener('click', () => {
+            mobileMenu.addEventListener('click', function() {
                 navbarLinks.classList.toggle('active');
                 mobileMenu.classList.toggle('active');
             });
 
-            // Close mobile menu when a link is clicked
-            navbarLinks.querySelectorAll('a').forEach(link => {
-                link.addEventListener('click', () => {
+            // Smooth scrolling for navigation links
+            document.querySelectorAll('nav ul li a').forEach(anchor => {
+                anchor.addEventListener('click', function (e) {
+                    e.preventDefault();
+                    document.querySelector(this.getAttribute('href')).scrollIntoView({
+                        behavior: 'smooth'
+                    });
                     if (navbarLinks.classList.contains('active')) {
                         navbarLinks.classList.remove('active');
                         mobileMenu.classList.remove('active');
@@ -844,181 +1571,493 @@
                 });
             });
 
-            // Pizza selection logic
+            // Welcome Modal Logic
+            const welcomeModal = document.getElementById('welcomeModal');
+            welcomeModal.addEventListener('click', function() {
+                welcomeModal.style.display = 'none';
+            });
+            welcomeModal.style.display = 'flex'; // Display on page load
+
+            // Terms Modal Logic
+            const termsModal = document.getElementById('termsModal');
+            const openTermsModalLink = document.getElementById('openTermsModalLink');
+            const agreeTermsCheckbox = document.getElementById('acceptTermsCheckbox');
+            const proceedSubscriptionButton = document.getElementById('proceedSubscriptionButton');
+
+            if (openTermsModalLink) {
+                openTermsModalLink.addEventListener('click', function(e) {
+                    e.preventDefault();
+                    termsModal.style.display = 'flex';
+                });
+            }
+
+            if (agreeTermsCheckbox) {
+                agreeTermsCheckbox.addEventListener('change', function() {
+                    if (proceedSubscriptionButton) {
+                        proceedSubscriptionButton.disabled = !this.checked;
+                    }
+                });
+            }
+
+            if (proceedSubscriptionButton) {
+                proceedSubscriptionButton.addEventListener('click', function() {
+                    if (agreeTermsCheckbox.checked) {
+                        termsModal.style.display = 'none';
+                        // Optionally, scroll to the subscription form or activate it
+                        document.querySelector('#assinatura').scrollIntoView({ behavior: 'smooth' });
+                    } else {
+                        alert('Você precisa aceitar os termos e condições para prosseguir.');
+                    }
+                });
+            }
+
+            // Pizza Type Selection Logic for Pedidos
             const pizzaTypeRadios = document.querySelectorAll('input[name="pizzaType"]');
-            const salgadaPizzasDiv = document.getElementById('salgadaPizzas');
-            const docePizzasDiv = document.getElementById('docePizzas');
-            
-            // Função para resetar quantidades e checkboxes de brotinho
-            const resetPizzaSelections = (div) => {
-                div.querySelectorAll('input[type="number"]').forEach(input => input.value = 0);
-                div.querySelectorAll('input[type="checkbox"]').forEach(input => input.checked = false);
-            };
+            const salgadaPizzas = document.getElementById('salgadaPizzas');
+            const docePizzas = document.getElementById('docePizzas');
 
             pizzaTypeRadios.forEach(radio => {
-                radio.addEventListener('change', () => {
-                    const selectedType = document.querySelector('input[name="pizzaType"]:checked').value;
-                    if (selectedType === 'salgada') {
-                        salgadaPizzasDiv.style.display = 'block';
-                        docePizzasDiv.style.display = 'none';
-                        resetPizzaSelections(docePizzasDiv);
-                    } else if (selectedType === 'doce') {
-                        salgadaPizzasDiv.style.display = 'none';
-                        docePizzasDiv.style.display = 'block';
-                        resetPizzaSelections(salgadaPizzasDiv);
-                    } else { // ambas
-                        salgadaPizzasDiv.style.display = 'block';
-                        docePizzasDiv.style.display = 'block';
+                radio.addEventListener('change', function() {
+                    salgadaPizzas.style.display = 'none';
+                    docePizzas.style.display = 'none';
+
+                    if (this.value === 'salgada' || this.value === 'ambas') {
+                        salgadaPizzas.style.display = 'block';
+                    }
+                    if (this.value === 'doce' || this.value === 'ambas') {
+                        docePizzas.style.display = 'block';
                     }
                 });
             });
 
-            // Borda selection logic
-            const bordaCheckboxes = document.querySelectorAll('.borda-selection-group input[type="checkbox"]');
-            bordaCheckboxes.forEach(checkbox => {
-                checkbox.addEventListener('change', (event) => {
-                    // Assume the quantity input is the second sibling after the label for direct access
-                    const qtyInput = event.target.nextElementSibling.nextElementSibling; 
-                    if (qtyInput && qtyInput.type === 'number') { // Ensure it's the quantity input
-                        if (event.target.checked) {
-                            qtyInput.style.display = 'inline-block';
-                            qtyInput.value = 1; // Default to 1 when checked
-                        } else {
-                            qtyInput.style.display = 'none';
-                            qtyInput.value = 0; // Reset quantity when unchecked
+            // Handle borda quantity input visibility
+            document.querySelectorAll('.borda-selection-group input[type="checkbox"]').forEach(checkbox => {
+                const qtyInput = checkbox.nextElementSibling; // Assuming qty input is next sibling
+                if (qtyInput && qtyInput.type === 'number') {
+                    checkbox.addEventListener('change', function() {
+                        qtyInput.style.display = this.checked ? 'block' : 'none';
+                        if (!this.checked) {
+                            qtyInput.value = 0; // Reset quantity if unchecked
                         }
-                    }
-                });
+                    });
+                }
             });
 
+            // Form submission logic for Pedidos
+            const orderForm = document.getElementById('orderForm');
+            const submitOrderButton = document.getElementById('submitOrderButton');
+            const orderSummary = document.getElementById('orderSummary');
+            const summaryDetails = document.getElementById('summaryDetails');
+            const totalPriceSpan = document.getElementById('totalPrice');
+            const confirmOrderButton = document.getElementById('confirmOrderButton');
+            const cancelOrderButton = document.getElementById('cancelOrderButton');
 
-            orderForm.addEventListener('submit', (event) => {
-                event.preventDefault();
+            // Store order details temporarily before confirmation
+            let currentOrderDetails = {};
+
+            orderForm.addEventListener('submit', function(e) {
+                e.preventDefault();
 
                 let total = 0;
-                let orderDetails = [];
-                let hasBrotinho = false;
-                let numPizzas = 0;
-
-                // Pizzas Salgadas
-                const pizzasSalgadas = [
-                    { id: 'qtyMussarela', name: 'Mussarela Tradicional', price: 55.00, brotinhoPrice: 19.25, brotinhoId: 'brotinhoMussarela' },
-                    { id: 'qtyCalabresa', name: 'Calabresa', price: 60.00, brotinhoPrice: 21.00, brotinhoId: 'brotinhoCalabresa' },
-                    { id: 'qtyPresunto', name: 'Presunto e Queijo', price: 58.00, brotinhoPrice: 20.30, brotinhoId: 'brotinhoPresunto' },
-                    { id: 'qtyVegetariano', name: 'Vegetariano de Legumes', price: 60.00, brotinhoPrice: 21.00, brotinhoId: 'brotinhoVegetariano' },
-                    { id: 'qtyPortuguesa', name: 'Portuguesa', price: 67.00, brotinhoPrice: 23.45, brotinhoId: 'brotinhoPortuguesa' }
-                ];
-
-                // Pizzas Doces
-                const pizzasDoces = [
-                    { id: 'qtyChocolate', name: 'Chocolate', price: 45.00, brotinhoPrice: 15.75, brotinhoId: 'brotinhoChocolate' },
-                    { id: 'qtyDocePecado', name: 'Doce Pecado', price: 55.00, brotinhoPrice: 19.25, brotinhoId: 'brotinhoDocePecado' },
-                    { id: 'qtyRomeuJulieta', name: 'Romeu e Julieta', price: 43.00, brotinhoPrice: 15.05, brotinhoId: 'brotinhoRomeuJulieta' }
-                ];
-
-                const allPizzas = [...pizzasSalgadas, ...pizzasDoces];
-
-                allPizzas.forEach(pizza => {
-                    const qtyInput = document.getElementById(pizza.id);
-                    const brotinhoCheckbox = document.getElementById(pizza.brotinhoId);
-                    const quantity = parseInt(qtyInput.value);
-
-                    if (quantity > 0) {
-                        numPizzas += quantity;
-                        let itemPrice = 0;
-                        let itemName = pizza.name;
-                        if (brotinhoCheckbox && brotinhoCheckbox.checked) {
-                            itemPrice = pizza.brotinhoPrice;
-                            itemName += ' (Brotinho)';
-                            hasBrotinho = true;
-                        } else {
-                            itemPrice = pizza.price;
-                        }
-                        total += quantity * itemPrice;
-                        orderDetails.push(`${quantity}x ${itemName} (R$${(quantity * itemPrice).toFixed(2).replace('.', ',')})`);
-                    }
-                });
-
-                // Bônus Brotinho Doce na compra de 3 pizzas
-                let brotinhoBonusText = "";
-                if (numPizzas >= 3) {
-                    brotinhoBonusText = "\n*** GANHE UM BROTINHO DOCE NO SABOR QUE DESEJAR! ***";
-                }
-
-
-                // Bordas Recheadas
-                const bordas = [
-                    { id: 'bordaCheddar', name: 'Borda Cheddar', price: 9.50 },
-                    { id: 'bordaCatupiry', name: 'Borda Catupiry', price: 11.50 },
-                    { id: 'bordaChocolate', name: 'Borda Chocolate ao Leite', price: 14.50 },
-                    { id: 'bordaRequeijao', name: 'Borda Requeijão', price: 13.50 }
-                ];
-
-                bordas.forEach(borda => {
-                    const bordaCheckbox = document.getElementById(borda.id);
-                    // Construct the ID for the quantity input (e.g., 'qtyBordaCheddar' for 'bordaCheddar')
-                    const qtyBordaInputId = 'qty' + borda.id.charAt(0).toUpperCase() + borda.id.slice(1);
-                    const qtyBordaInput = document.getElementById(qtyBordaInputId);
-                    
-                    if (bordaCheckbox.checked && qtyBordaInput && parseInt(qtyBordaInput.value) > 0) {
-                        let bordaPrice = borda.price;
-                        // Apply half price for brotinho if *any* brotinho was selected in the order
-                        if (hasBrotinho) { 
-                            bordaPrice /= 2;
-                        }
-                        const qtyBorda = parseInt(qtyBordaInput.value);
-                        total += qtyBorda * bordaPrice;
-                        orderDetails.push(`${qtyBorda}x ${borda.name} (R$${(qtyBorda * bordaPrice).toFixed(2).replace('.', ',')})`);
-                    }
-                });
-
-                // Forma de Entrega
-                const deliveryMethod = document.getElementById('deliveryMethod').value;
-                let deliveryCost = 0;
-                let deliveryText = "Retirada no Local";
-                if (deliveryMethod === 'delivery') {
-                    deliveryCost = 5.00;
-                    total += deliveryCost;
-                    deliveryText = "Via Delivery";
-                    orderDetails.push(`Taxa de Entrega: R$${deliveryCost.toFixed(2).replace('.', ',')}`);
-                }
-
-                // Desconto de 1 real por pagamento em 15 minutos
-                let discountText = "";
-                let discountAmount = 0;
-                // Para simulação, vamos aplicar o desconto. Em um cenário real, isso exigiria um backend para controle de tempo.
-                discountAmount = 1.00;
-                total -= discountAmount;
-                discountText = `Desconto de R$${discountAmount.toFixed(2).replace('.', ',')} (Pagamento em 15 minutos)`;
-                orderDetails.push(discountText);
-                
-
-                const finalTotal = total.toFixed(2);
-                totalPriceSpan.textContent = `R$${finalTotal.replace('.', ',')}`;
-                summaryDetails.innerHTML = orderDetails.join('<br>');
-                orderSummary.style.display = 'block';
-
-                // WhatsApp message generation
+                let summary = [];
                 const now = new Date();
-                const orderDate = now.toLocaleDateString('pt-BR');
-                const orderTime = now.toLocaleTimeString('pt-BR', { hour: '2-digit', minute: '2-digit' });
+                const day = String(now.getDate()).padStart(2, '0');
+                const month = String(now.getMonth() + 1).padStart(2, '0'); // Month is 0-indexed
+                const year = now.getFullYear();
+                const hours = String(now.getHours()).padStart(2, '0');
+                const minutes = String(now.getMinutes()).padStart(2, '0');
+                const seconds = String(now.getSeconds()).padStart(2, '0');
+                const currentOrderTime = `${hours}:${minutes}:${seconds}`;
+                const currentOrderDate = `${day}/${month}/${year}`;
 
-                let whatsappMessage = `Olá Kakau Pizzas!\n\nMeu pedido:\n`;
-                whatsappMessage += orderDetails.map(item => `- ${item}`).join('\n');
-                whatsappMessage += `\n\nForma de Entrega: ${deliveryText}`;
-                whatsappMessage += `\nValor Total: R$${finalTotal.replace('.', ',')}`;
-                whatsappMessage += `\n\nData do Pedido: ${orderDate}`;
-                whatsappMessage += `\nHorário do Pedido: ${orderTime}`;
-                whatsappMessage += brotinhoBonusText; // Adiciona o texto do bônus
-                whatsappMessage += `\n\nChave PIX para pagamento: 66992115947 (telefone).`;
-                whatsappMessage += `\nPor favor, envie o comprovante de pagamento PIX para que o pedido seja produzido.`;
-                whatsappMessage += `\nLembre-se do seu desconto de R$${discountAmount.toFixed(2).replace('.', ',')} se o pagamento for feito em 15 minutos!`;
+                // Generate a simple unique protocol for the order
+                const protocolGenerated = `PROT-${day}${month}${year}-${hours}${minutes}${seconds}`;
+
+                // Get customer information for WhatsApp message
+                const customerName = document.getElementById('customerName').value;
+                const customerPhone = document.getElementById('customerPhone').value;
+                const customerCpf = document.getElementById('customerCpf').value;
+                const customerCnpj = document.getElementById('customerCnpj').value; // CNPJ is optional
+                const deliveryLocation = document.getElementById('deliveryLocation').value;
+                const deliveryPrice = parseFloat(document.getElementById('deliveryLocation').selectedOptions[0].dataset.price);
+
+                // Collect pizza quantities and types
+                const pizzaQuantities = {};
+                document.querySelectorAll('#salgadaPizzas input[type="number"], #docePizzas input[type="number"]').forEach(input => {
+                    const id = input.id.replace('qty', '');
+                    const qty = parseInt(input.value);
+                    if (qty > 0) {
+                        const price = parseFloat(input.dataset.price);
+                        const brotinhoCheckbox = document.getElementById(`brotinho${id}`);
+                        const isBrotinho = brotinhoCheckbox && brotinhoCheckbox.checked;
+                        const brotinhoPrice = parseFloat(input.dataset.brotinhoPrice);
+
+                        const itemPrice = isBrotinho ? brotinhoPrice : price;
+                        const itemType = isBrotinho ? 'Brotinho' : 'Tamanho Normal';
+                        const itemName = input.previousElementSibling.textContent.split('(')[0].trim();
+                        summary.push(`${qty}x ${itemName} (${itemType}): R$${(qty * itemPrice).toFixed(2).replace('.', ',')}`);
+                        total += qty * itemPrice;
+                    }
+                    pizzaQuantities[id] = qty;
+                });
+
+                // Collect borda quantities
+                document.querySelectorAll('.borda-selection-group input[type="checkbox"]:checked').forEach(checkbox => {
+                    const qtyInput = checkbox.nextElementSibling;
+                    const qty = parseInt(qtyInput.value);
+                    if (qty > 0) {
+                        const price = parseFloat(checkbox.dataset.price);
+                        const bordaName = checkbox.nextElementSibling.nextElementSibling.textContent.split('(')[0].trim();
+                        summary.push(`${qty}x Borda ${bordaName}: R$${(qty * price).toFixed(2).replace('.', ',')}`);
+                        total += qty * price;
+                    }
+                });
+
+                if (total === 0) {
+                    alert('Por favor, selecione pelo menos uma pizza para fazer o pedido.');
+                    return;
+                }
+
+                // Add delivery price
+                if (deliveryLocation !== 'retirada') {
+                    total += deliveryPrice;
+                    summary.push(`Taxa de Entrega (${document.getElementById('deliveryLocation').selectedOptions[0].textContent}): R$${deliveryPrice.toFixed(2).replace('.', ',')}`);
+                } else {
+                     summary.push(`Retirada no Local: Grátis`);
+                }
+
+                summaryDetails.innerHTML = summary.join('<br>');
+                totalPriceSpan.textContent = `R$${total.toFixed(2).replace('.', ',')}`;
+                orderSummary.style.display = 'block';
+                
+                // Store order details for later confirmation
+                currentOrderDetails = {
+                    total: total,
+                    summary: summary,
+                    customerName: customerName,
+                    customerPhone: customerPhone,
+                    customerCpf: customerCpf,
+                    customerCnpj: customerCnpj,
+                    deliveryLocationText: document.getElementById('deliveryLocation').selectedOptions[0].textContent,
+                    currentOrderTime: currentOrderTime,
+                    currentOrderDate: currentOrderDate, // Added current date
+                    protocolGenerated: protocolGenerated
+                };
+            });
+
+            confirmOrderButton.addEventListener('click', function() {
+                // Construct WhatsApp Message from stored details
+                let whatsappMessage = `*NOVO PEDIDO - Kakau Pizzas*%0A%0A`;
+                whatsappMessage += `*--- DADOS DO CLIENTE ---*%0A`;
+                whatsappMessage += `*Nome:* ${encodeURIComponent(currentOrderDetails.customerName)}%0A`;
+                whatsappMessage += `*Telefone:* ${encodeURIComponent(currentOrderDetails.customerPhone)}%0A`;
+                whatsappMessage += `*CPF:* ${encodeURIComponent(currentOrderDetails.customerCpf)}%0A`;
+                if (currentOrderDetails.customerCnpj) {
+                    whatsappMessage += `*CNPJ:* ${encodeURIComponent(currentOrderDetails.customerCnpj)}%0A`;
+                }
+                whatsappMessage += `*Local de Entrega:* ${encodeURIComponent(currentOrderDetails.deliveryLocationText)}%0A`;
+                whatsappMessage += `*Data do Pedido:* ${encodeURIComponent(currentOrderDetails.currentOrderDate)}%0A`; // Added
+                whatsappMessage += `*Hora do Pedido:* ${encodeURIComponent(currentOrderDetails.currentOrderTime)}%0A`;
+                whatsappMessage += `%0A*--- RESUMO DO PEDIDO ---*%0A`;
+                whatsappMessage += `${encodeURIComponent(currentOrderDetails.summary.join('\n'))}%0A`;
+                whatsappMessage += `*Total a Pagar:* ${encodeURIComponent(totalPriceSpan.textContent)}%0A`;
+                whatsappMessage += `*Método de Pagamento:* PIX%0A`;
+                whatsappMessage += `*Chave PIX:* _66.99211-5947 (Celular)_%0A%0A`;
+                whatsappMessage += `*------------------------------------*%0A`;
+                whatsappMessage += `*_Por favor, aguarde a confirmação de nossa equipe!_*%0A`;
+                whatsappMessage += `*Protocolo do Pedido:* *${encodeURIComponent(currentOrderDetails.protocolGenerated)}*%0A`;
 
 
-                const whatsappUrl = `https://wa.me/5566992115947?text=${encodeURIComponent(whatsappMessage)}`;
+                const whatsappUrl = `https://wa.me/5566992115947?text=${whatsappMessage}`;
                 window.open(whatsappUrl, '_blank');
 
-                alert("Pedido enviado! A sua pizza será produzida mediante comprovante de pagamento PIX.");
+                alert(`Seu pedido foi enviado! Protocolo: ${currentOrderDetails.protocolGenerated}. Por favor, aguarde o WhatsApp de confirmação.`);
+                orderSummary.style.display = 'none'; // Hide summary after sending
+                orderForm.reset(); // Reset the form
+                // Also reset quantities and unchecked brotinhos/bordas
+                document.querySelectorAll('input[type="number"]').forEach(input => input.value = 0);
+                document.querySelectorAll('input[type="checkbox"]').forEach(checkbox => {
+                    checkbox.checked = false;
+                    const qtyInput = checkbox.nextElementSibling;
+                    if (qtyInput && qtyInput.type === 'number') {
+                        qtyInput.style.display = 'none';
+                    }
+                });
+                salgadaPizzas.style.display = 'block'; // Ensure default display for pizza types
+                docePizzas.style.display = 'none';
+                document.getElementById('pizzaTypeSalgada').checked = true; // Set default pizza type radio
+            });
+
+            cancelOrderButton.addEventListener('click', function() {
+                orderSummary.style.display = 'none'; // Hide summary
+                orderForm.reset(); // Reset the form
+                // Also reset quantities and unchecked brotinhos/bordas
+                document.querySelectorAll('input[type="number"]').forEach(input => input.value = 0);
+                document.querySelectorAll('input[type="checkbox"]').forEach(checkbox => {
+                    checkbox.checked = false;
+                    const qtyInput = checkbox.nextElementSibling;
+                    if (qtyInput && qtyInput.type === 'number') {
+                        qtyInput.style.display = 'none';
+                    }
+                });
+                salgadaPizzas.style.display = 'block'; // Ensure default display for pizza types
+                docePizzas.style.display = 'none';
+                document.getElementById('pizzaTypeSalgada').checked = true; // Set default pizza type radio
+            });
+
+
+            // Subscription Form Logic
+            const subscriptionForm = document.getElementById('subscriptionForm');
+            const subscriptionPlanSelect = document.getElementById('subscriptionPlan');
+            const cnpjField = document.getElementById('cnpjField');
+            const companyCnpjInput = document.getElementById('companyCnpj');
+            const pixInstallmentField = document.getElementById('pixInstallmentField');
+            const pixInstallmentSelect = document.getElementById('pixInstallment');
+            const subscriberCpfInput = document.getElementById('subscriberCpf');
+            const subscriberPhoneInput = document.getElementById('subscriberPhone');
+            const subscriptionSummaryDiv = document.getElementById('subscriptionSummary');
+            const subscriptionSummaryDetails = document.getElementById('subscriptionSummaryDetails');
+            const subscriptionTotalPriceSpan = document.getElementById('subscriptionTotalPrice');
+            const subscribeButton = document.getElementById('subscribeButton');
+
+            subscriptionPlanSelect.addEventListener('change', function() {
+                const selectedOption = this.selectedOptions[0];
+                const planValue = selectedOption.value;
+                const planPrice = parseFloat(selectedOption.dataset.price);
+
+                if (planValue === 'empresarial') {
+                    cnpjField.style.display = 'block';
+                    companyCnpjInput.setAttribute('required', 'required');
+                    pixInstallmentField.style.display = 'none'; // Hide for Empresarial
+                } else {
+                    cnpjField.style.display = 'none';
+                    companyCnpjInput.removeAttribute('required');
+                    companyCnpjInput.value = ''; // Clear CNPJ if not empresarial
+
+                    if (!isNaN(planPrice) && planPrice > 0) {
+                        pixInstallmentField.style.display = 'block';
+                        pixInstallmentSelect.innerHTML = ''; // Clear previous options
+
+                        // Add "À vista" option
+                        let optionAvista = document.createElement('option');
+                        optionAvista.value = '1';
+                        optionAvista.textContent = `À vista: R$${planPrice.toFixed(2).replace('.', ',')}`;
+                        pixInstallmentSelect.appendChild(optionAvista);
+
+                        // Add "2x" option
+                        let option2x = document.createElement('option');
+                        option2x.value = '2';
+                        option2x.textContent = `2x de R$${(planPrice / 2).toFixed(2).replace('.', ',')}`;
+                        pixInstallmentSelect.appendChild(option2x);
+
+                        // Add "4x" option
+                        let option4x = document.createElement('option');
+                        option4x.value = '4';
+                        option4x.textContent = `4x de R$${(planPrice / 4).toFixed(2).replace('.', ',')}`;
+                        pixInstallmentSelect.appendChild(option4x);
+
+                    } else {
+                        pixInstallmentField.style.display = 'none'; // Hide if no valid price
+                    }
+                }
+
+                // Enable/disable subscribe button based on plan selection (and terms agreement)
+                subscribeButton.disabled = (planValue === '' || !document.getElementById('acceptTermsCheckbox').checked);
+            });
+
+            document.getElementById('acceptTermsCheckbox').addEventListener('change', function() {
+                subscribeButton.disabled = (subscriptionPlanSelect.value === '' || !this.checked);
+            });
+
+            // CPF and Phone Number Masking (reused for orders and subscriptions)
+            function maskCpf(value) {
+                value = value.replace(/\D/g, ""); // Remove non-digits
+                value = value.replace(/(\d{3})(\d)/, "$1.$2");
+                value = value.replace(/(\d{3})(\d)/, "$1.$2");
+                value = value.replace(/(\d{3})(\d{1,2})$/, "$1-$2");
+                return value;
+            }
+
+            function maskPhone(value) {
+                value = value.replace(/\D/g, ""); // Remove non-digits
+                if (value.length > 10) { // For numbers with 9th digit
+                    value = value.replace(/^(\d\d)(\d{5})(\d{4}).*/, "($1) $2-$3");
+                } else if (value.length > 5) { // For numbers without 9th digit (fixed line)
+                    value = value.replace(/^(\d\d)(\d{4})(\d{0,4}).*/, "($1) $2-$3");
+                } else if (value.length > 2) { // Just DDD
+                    value = value.replace(/^(\d\d)(\d+)/, "($1) $2");
+                }
+                return value;
+            }
+
+            function maskCnpj(value) {
+                value = value.replace(/\D/g, ""); // Remove non-digits
+                value = value.replace(/^(\d{2})(\d)/, "$1.$2");
+                value = value.replace(/^(\d{2})\.(\d{3})(\d)/, "$1.$2.$3");
+                value = value.replace(/\.(\d{3})(\d)/, ".$1/$2");
+                value = value.replace(/(\d{4})(\d)/, "$1-$2");
+                return value;
+            }
+
+            // Apply masks to CPF, Phone, and CNPJ fields
+            document.getElementById('customerCpf').addEventListener('input', function(e) {
+                e.target.value = maskCpf(e.target.value);
+            });
+            document.getElementById('subscriberCpf').addEventListener('input', function(e) {
+                e.target.value = maskCpf(e.target.value);
+            });
+            document.getElementById('customerPhone').addEventListener('input', function(e) {
+                e.target.value = maskPhone(e.target.value);
+            });
+            document.getElementById('subscriberPhone').addEventListener('input', function(e) {
+                e.target.value = maskPhone(e.target.value);
+            });
+            document.getElementById('companyCnpj').addEventListener('input', function(e) {
+                e.target.value = maskCnpj(e.target.value);
+            });
+
+
+            subscriptionForm.addEventListener('submit', function(e) {
+                e.preventDefault();
+
+                const plan = subscriptionPlanSelect.value;
+                const planText = subscriptionPlanSelect.selectedOptions[0].textContent;
+                let subscriptionPrice = parseFloat(subscriptionPlanSelect.selectedOptions[0].dataset.price || '0');
+                let selectedInstallmentOption = ''; // To store the selected PIX installment option
+
+                if (plan === '') {
+                    alert('Por favor, selecione um plano de assinatura.');
+                    return;
+                }
+                if (!agreeTermsCheckbox.checked) {
+                    alert('Você deve concordar com os Termos e Condições para assinar.');
+                    return;
+                }
+
+                if (plan !== 'empresarial') {
+                    selectedInstallmentOption = pixInstallmentSelect.selectedOptions[0].textContent;
+                    // For summary, the total price is still the full monthly subscription,
+                    // but we will highlight the installment in the details.
+                    // The 'Total a pagar (primeira parcela)' will be the actual installment value.
+                    const installmentValue = parseFloat(selectedInstallmentOption.split('R$')[1].replace('.', '').replace(',', '.'));
+                    subscriptionPrice = installmentValue; // Update price for summary display
+                }
+
+
+                const subscriberName = document.getElementById('subscriberName').value;
+                const subscriberCpf = document.getElementById('subscriberCpf').value;
+                const subscriberPhone = document.getElementById('subscriberPhone').value;
+                const subscriberEmail = document.getElementById('subscriberEmail').value;
+                const deliveryAddress = document.getElementById('deliveryAddress').value;
+                const companyCnpj = document.getElementById('companyCnpj').value;
+
+                let summary = [];
+                summary.push(`Plano: ${planText}`);
+                if (plan === 'empresarial') {
+                    summary.push(`CNPJ da Empresa: ${companyCnpj}`);
+                    subscriptionPrice = 'A ser consultado'; // Price for empresarial is dynamic
+                } else {
+                    summary.push(`Opção de Pagamento PIX: ${selectedInstallmentOption}`); // Add installment option to summary
+                }
+                summary.push(`Nome Completo: ${subscriberName}`);
+                summary.push(`CPF: ${subscriberCpf}`);
+                summary.push(`Telefone: ${subscriberPhone}`);
+                summary.push(`E-mail: ${subscriberEmail}`);
+                summary.push(`Endereço de Entrega: ${deliveryAddress}`);
+
+                subscriptionSummaryDetails.innerHTML = summary.join('<br>');
+                subscriptionTotalPriceSpan.textContent = typeof subscriptionPrice === 'number' ? `R$${subscriptionPrice.toFixed(2).replace('.', ',')}` : subscriptionPrice;
+                subscriptionSummaryDiv.style.display = 'block';
+
+                const now = new Date();
+                const day = String(now.getDate()).padStart(2, '0');
+                const month = String(now.getMonth() + 1).padStart(2, '0');
+                const year = now.getFullYear();
+                const currentTime = now.toLocaleTimeString('pt-BR', { hour: '2-digit', minute: '2-digit', second: '2-digit' });
+                const currentSubscriptionDate = `${day}/${month}/${year}`;
+                
+                // Calculate estimated next due date (approx. 30 days later)
+                const nextDueDate = new Date(now);
+                nextDueDate.setDate(now.getDate() + 30);
+                const nextDueDay = String(nextDueDate.getDate()).padStart(2, '0');
+                const nextDueMonth = String(nextDueDate.getMonth() + 1).padStart(2, '0');
+                const nextDueYear = nextDueDate.getFullYear();
+                const estimatedNextDueDate = `${nextDueDay}/${nextDueMonth}/${nextDueYear}`;
+
+                const monthInitials = now.toLocaleString('pt-BR', { month: 'short' }).toUpperCase().replace('.', '');
+                const protocolSubscription = `ASS-${day}${monthInitials}-${year}${now.getHours()}${now.getMinutes()}${now.getSeconds()}`;
+
+                // Construct WhatsApp message for subscription
+                let whatsappMessage = `*NOVA ASSINATURA - Kakau Pizzas*%0A%0A`;
+                whatsappMessage += `*--- DADOS DO ASSINANTE ---*%0A`;
+                whatsappMessage += `*Nome:* ${encodeURIComponent(subscriberName)}%0A`;
+                whatsappMessage += `*CPF:* ${encodeURIComponent(subscriberCpf)}%0A`;
+                whatsappMessage += `*Telefone:* ${encodeURIComponent(subscriberPhone)}%0A`;
+                whatsappMessage += `*E-mail:* ${encodeURIComponent(subscriberEmail)}%0A`;
+                whatsappMessage += `*Endereço:* ${encodeURIComponent(deliveryAddress)}%0A`;
+                if (plan === 'empresarial') {
+                    whatsappMessage += `*CNPJ:* ${encodeURIComponent(companyCnpj)}%0A`;
+                }
+                whatsappMessage += `%0A*--- DETALHES DA ASSINATURA ---*%0A`;
+                whatsappMessage += `*Plano Selecionado:* _${encodeURIComponent(planText)}_%0A`;
+                if (plan !== 'empresarial') {
+                    whatsappMessage += `*Opção de Pagamento PIX:* _${encodeURIComponent(selectedInstallmentOption)}_%0A`; // Add installment to WhatsApp
+                    whatsappMessage += `*Valor da Primeira Parcela:* _${encodeURIComponent(subscriptionTotalPriceSpan.textContent)}_%0A`;
+                    whatsappMessage += `*Método de Pagamento:* PIX%0A`;
+                    whatsappMessage += `*Chave PIX:* _66.99211-5947 (Celular)_%0A`;
+                } else {
+                    whatsappMessage += `*_Valor a ser consultado após contato para planos empresariais._*%0A`;
+                }
+                whatsappMessage += `*Data da Assinatura:* ${encodeURIComponent(currentSubscriptionDate)}%0A`; // Added
+                whatsappMessage += `*Hora da Assinatura:* ${encodeURIComponent(currentTime)}%0A`; // Added
+                whatsappMessage += `*Vencimento Próxima Parcela (Estimado):* ${encodeURIComponent(estimatedNextDueDate)}%0A`; // Added
+                whatsappMessage += `%0A*--- CONTROLE MANUAL DE PAGAMENTOS ---*%0A`;
+                whatsappMessage += `_Lembre-se de verificar o pagamento na data de vencimento. Em caso de atraso, o fornecimento será suspenso e medidas legais poderão ser tomadas conforme nossos termos de serviço._%0A`; // Added
+                whatsappMessage += `*------------------------------------*%0A`;
+                whatsappMessage += `*_Sua solicitação foi registrada! Nossa equipe entrará em contato para confirmar._*%0A`;
+                whatsappMessage += `*Protocolo da Assinatura:* *${encodeURIComponent(protocolSubscription)}*%0A`;
+                
+
+                const whatsappUrl = `https://wa.me/5566992115947?text=${whatsappMessage}`;
+                window.open(whatsappUrl, '_blank');
+
+                alert(`Sua solicitação de assinatura para o plano ${planText} foi enviada! Protocolo: ${protocolSubscription}. Aguarde nosso contato.`);
+            });
+
+            // Cancel Subscription Logic
+            const cancelSubscriptionButton = document.getElementById('cancelSubscriptionButton');
+            const cancelProtocolInput = document.getElementById('cancelProtocol');
+
+            cancelSubscriptionButton.addEventListener('click', function() {
+                const protocolToCancel = cancelProtocolInput.value.trim();
+                if (protocolToCancel) {
+                    const now = new Date();
+                    const day = String(now.getDate()).padStart(2, '0');
+                    const month = String(now.getMonth() + 1).padStart(2, '0');
+                    const year = now.getFullYear();
+                    const currentTime = now.toLocaleTimeString('pt-BR', { hour: '2-digit', minute: '2-digit', second: '2-digit' });
+                    const cancelDate = `${day}/${month}/${year}`;
+                    
+                    const cancelProtocolGenerated = `CANC-${day}${month}${year}-${now.getHours()}${now.getMinutes()}${now.getSeconds()}`;
+                    
+                    let whatsappMessage = `*CANCELAMENTO DE ASSINATURA - Kakau Pizzas*%0A%0A`;
+                    whatsappMessage += `*--- DADOS DO CANCELAMENTO ---*%0A`;
+                    whatsappMessage += `*Protocolo Original da Assinatura:* *${encodeURIComponent(protocolToCancel)}*%0A`; // Enhanced
+                    whatsappMessage += `*Data da Solicitação:* ${encodeURIComponent(cancelDate)}%0A`;
+                    whatsappMessage += `*Hora da Solicitação:* ${encodeURIComponent(currentTime)}%0A`;
+                    whatsappMessage += `*Protocolo de Cancelamento:* *${encodeURIComponent(cancelProtocolGenerated)}*%0A`;
+                    whatsappMessage += `*------------------------------------*%0A`;
+                    whatsappMessage += `_Sua solicitação de cancelamento foi registrada e será processada em breve. Débitos pendentes ainda devem ser quitados conforme termos de serviço._%0A`; // Enhanced
+                    whatsappMessage += `*------------------------------------*%0A`;
+
+
+                    const whatsappUrl = `https://wa.me/5566992115947?text=${whatsappMessage}`;
+                    window.open(whatsappUrl, '_blank');
+                    
+                    alert(`Sua solicitação de cancelamento para o protocolo ${protocolToCancel} foi enviada. Aguarde a confirmação.`);
+                } else {
+                    alert('Por favor, digite o protocolo da assinatura para cancelar.');
+                }
             });
         });
     </script>
